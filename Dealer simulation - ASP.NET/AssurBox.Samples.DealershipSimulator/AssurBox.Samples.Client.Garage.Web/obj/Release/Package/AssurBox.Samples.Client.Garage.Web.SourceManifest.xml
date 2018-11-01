@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<sitemanifest>
-  <IisApp path="D:\GIT_SABEO\AssurBox2\AssurBox.Samples\AssurBox.Samples.Client.Garage.Web\obj\Release\Package\PackageTmp" />
-  <setAcl path="D:\GIT_SABEO\AssurBox2\AssurBox.Samples\AssurBox.Samples.Client.Garage.Web\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
-  <setAcl path="D:\GIT_SABEO\AssurBox2\AssurBox.Samples\AssurBox.Samples.Client.Garage.Web\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
-</sitemanifest>
