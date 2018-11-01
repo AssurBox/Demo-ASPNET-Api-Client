@@ -1,6 +1,6 @@
-﻿@model IEnumerable<AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInfoSummary>
+﻿@model AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestSummary
 @{
-    ViewBag.Title = "Requests : " + Model.Count();
+    ViewBag.Title = "Requests : " + Model.Total;
 }
 
 <a href="@Url.Action("Create")" class="btn btn-primary">Create</a>
@@ -19,7 +19,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var request in Model)
+        @foreach (var request in Model.Data)
         {
         <tr>
             <td>
