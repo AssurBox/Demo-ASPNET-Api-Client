@@ -1,0 +1,6 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Dealer simulation - ASP.NET/AssurBox.Samples.DealershipSimulator/.vs/AssurBox.Samples.DealershipSimulator/v15
+/Dealer simulation - ASP.NET/AssurBox.Samples.DealershipSimulator/.vs/config/applicationhost.config
