@@ -1,0 +1,39 @@
+﻿ public class GreenCardClient : ApiClient
+    {
+        public ApiResponse SendCarGreenCardRequest(GreenCardRequest greencard)
+        {
+            if (string.IsNullOrEmpty(greencard.LicencePlate))
+            {
+                throw new ArgumentException("Licence plate is required");
+            }
+            if (string.IsNullOrEmpty(greencard.Vehicle.VIN))
+            {
+                throw new ArgumentException("VIN is required");
+            }
+            HttpResponseMessage response = Client.PostAsJsonAsync("api/SendGreenCardRequest", greencard).Result;
+            response.EnsureSuccessStatusCode();
+            ApiResponse apiResponse = response.Content.ReadAsAsync<ApiResponse>().Result;
+            if (apiResponse.MessageId != greencard.MessageId)
+            {
+                throw new NotConfirmedException();
+            }
+
+            return apiResponse;
+        }
+
+        public IEnumerable<GreenCardResponse> GetList()
+        {
+           HttpResponseMessage response = Client.GetAsync("api/CarGreenCardResponses/GetList").Result;
+            response.EnsureSuccessStatusCode();
+
+            return response.Content.ReadAsAsync<IEnumerable<GreenCardResponse>>().Result;
+        }
+
+        public GreenCardResponse Get(int requestId)
+        {
+            HttpResponseMessage response = Client.GetAsync(string.Format("api/CarGreenCardResponses/Get?requestId={0}", requestId)).Result;
+            response.EnsureSuccessStatusCode();
+
+            return response.Content.ReadAsAsync<GreenCardResponse>().Result;
+        }
+    }

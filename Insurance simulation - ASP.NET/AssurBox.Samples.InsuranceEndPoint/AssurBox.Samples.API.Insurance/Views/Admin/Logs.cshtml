@@ -1,0 +1,29 @@
+﻿@model AssurBox.Samples.API.Insurance.Models.LogsModel
+
+@{
+    ViewBag.Title = "Logs";
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+      
+            <th>Date</th>
+            <th>Title</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var log in Model.Logs)
+        {
+            <tr>
+                <td>@log.LogDate</td>
+                <td>@log.Title</td>
+            </tr>
+        }
+
+
+    </tbody>
+</table>
+

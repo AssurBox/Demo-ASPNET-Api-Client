@@ -1,0 +1,32 @@
+﻿@model   AssurBox.Samples.API.Insurance.Models.AdminModel
+@{
+    ViewBag.Title = "Admin";
+}
+
+<h2>Last queries</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Request id</th>
+            <th>RequestDate</th>
+            <th>RequestRespondDate</th>
+            <th>ResponseInfo</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var requ in Model.Requests)
+        {
+            <tr>
+                <th><a href="@Url.Action("RequestDetail", new { requestID = requ.Id })">@requ.RequestId</a>  </th>
+                <td>@requ.RequestDate</td>
+                <td>@requ.RequestRespondDate</td>
+                <td>@requ.ResponseInfo</td>
+            </tr>
+        }
+
+
+    </tbody>
+</table>
+
