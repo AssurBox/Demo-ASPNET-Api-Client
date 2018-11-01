@@ -25,6 +25,7 @@ namespace AssurBox.Samples.Client.Garage.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> Index(CredentialsModel model)
         {
+            // test 
             using (SDK.Clients.IdentityClient client = new SDK.Clients.IdentityClient(new SDK.AssurBoxClientOptions ()))
             {
                 var token = await client.GetBearerToken(model.ClientID, model.ClientSecret);
