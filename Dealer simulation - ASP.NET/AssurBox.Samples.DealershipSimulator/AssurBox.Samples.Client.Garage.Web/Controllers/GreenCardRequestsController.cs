@@ -1,14 +1,11 @@
 ﻿using AssurBox.Samples.Client.Garage.Web.Core;
 using AssurBox.SDK;
 using AssurBox.SDK.DTO.GreenCard.Car;
-using Bogus;
 //using Bogus;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace AssurBox.Samples.Client.Garage.Web.Controllers
@@ -22,6 +19,9 @@ namespace AssurBox.Samples.Client.Garage.Web.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+
+            // retrieves the list of requests : note that this is for demo purpose, 
+            // in real life application you should keep the correlationid of the greencard request and retrieve the response when the user needs it
             using (SDK.Clients.CarGreenCardClient client = new SDK.Clients.CarGreenCardClient(SessionManager.BearerToken))
             {
                 var requests = await client.GetRequests();
