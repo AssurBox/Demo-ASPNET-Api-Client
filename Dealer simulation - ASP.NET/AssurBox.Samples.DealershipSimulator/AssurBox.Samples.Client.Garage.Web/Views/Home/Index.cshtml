@@ -1,0 +1,58 @@
+﻿@model AssurBox.Samples.Client.Garage.Web.Models.CredentialsModel
+@{
+    ViewBag.Title = "Simulation of a car dealer's information system ";
+    //rNCES=H6yb=Af5HD
+
+    //http://demo-aspnet-dealers.assurbox.net.lilac.arvixe.com/
+}
+
+<div class="jumbotron">
+    <h1>AssurBox Demo</h1>
+    <p class="lead">AssurBox is a B2B communication hub that helps insurances and partners to communicate efficiently</p>
+    <p><a href="http://www.assurbox.net" target="_blank" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Getting started</h2>
+        <p>
+            To get started with this demo, first authenticate with your credentials.
+        </p>
+        <p>
+            Follow these steps to get your keys : <a href="http://assurbox.net/screenshot-obtenir-les-cle-api/" target="_blank">watch tutorial</a>
+        </p>
+        <p>If you don't have any credentials : <a class="btn btn-default" href="mailto:support@assurbox.net?subject=Account request">Ask for an AssurBox account</a></p>
+    </div>
+    <div class="col-md-4">
+
+        @if (string.IsNullOrWhiteSpace(AssurBox.Samples.Client.Garage.Web.Core.SessionManager.BearerToken))
+        {
+            <h2>Use your keys</h2>
+            using (Html.BeginForm())
+            {
+
+                <label>Client ID : @Html.TextBoxFor(m => m.ClientID)</label>
+                <label>Client SECRET : @Html.TextBoxFor(m => m.ClientSecret)</label>
+                <br />
+                <input type="submit" value="Authenticate" />
+            }
+        }
+        else
+        {
+            <div class="alert alert-info">
+                Logged in as
+                @AssurBox.Samples.Client.Garage.Web.Core.SessionManager.UserName
+
+            </div>
+            <hr/>
+            @Html.ActionLink("List all requests", "Index", "GreenCardRequests")
+            <br/>
+            @Html.ActionLink("Create a new request", "Create", "GreenCardRequests")
+        }
+    </div>
+    <div class="col-md-4">
+        <h2>Other demos</h2>
+        <p>We provide demo application in several languages</p>
+        <p><a class="btn btn-default"   target="_blank" href="https://www.github.com/assurbox">Learn more &raquo;</a></p>
+    </div>
+</div>
