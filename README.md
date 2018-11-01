@@ -1,7 +1,8 @@
-# Demo-ASPNET-Api-Client
+# Demo Api client using ASP.NET
 
 
-Demo for partners using the AssurBox Api in ASP.NET
+Demo for partners using the AssurBox Api in ASP.NET and the AssurBox.SDK (https://www.nuget.org/packages/AssurBox.SDK/)
+
 
 Code : AssurBox.Samples.DealershipSimulator
 
