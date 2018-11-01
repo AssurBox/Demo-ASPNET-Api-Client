@@ -1,0 +1,1 @@
+﻿These contracts are for communication FROM AssurBox TO external endpoints (eg: insurance endpoint)

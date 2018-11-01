@@ -208,6 +208,20 @@
             <param name="version">API version, override AddVersion to customize</param>
             <param name="urlPath">Path to endpoint (e.g. /path/to/endpoint)</param>
         </member>
+        <member name="M:AssurBox.SDK.AssurBoxClient.GetJsoncontent``1(``0)">
+            <summary>
+            
+            <see href="https://stackoverflow.com/questions/6117101/posting-jsonobject-with-httpclient-from-web-api"/>
+            </summary>
+            <remarks>
+            <code>
+             client.PostAsync("api/CarGreenCard", content).Result;
+            </code>
+            </remarks>
+            <typeparam name="T"></typeparam>
+            <param name="content"></param>
+            <returns></returns>
+        </member>
         <member name="M:AssurBox.SDK.AssurBoxClient.Dispose">
             <summary>
             Closes the client and releases the ressources
@@ -222,6 +236,12 @@
             <summary>
             Initializes a new instance of the <see cref="T:AssurBox.SDK.AssurBoxClientOptions"/> class.
             </summary>
+        </member>
+        <member name="M:AssurBox.SDK.AssurBoxClientOptions.#ctor(AssurBox.SDK.AssurBoxEnvironments)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AssurBox.SDK.AssurBoxClientOptions"/> class.
+            </summary>
+            <param name="environment">Specify the environment</param>
         </member>
         <member name="P:AssurBox.SDK.AssurBoxClientOptions.ReliabilitySettings">
             <summary>
@@ -252,6 +272,26 @@
         <member name="P:AssurBox.SDK.AssurBoxClientOptions.UrlPath">
             <summary>
             Gets or sets the path to the API endpoint.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.AssurBoxClientOptions.Environment">
+            <summary>
+            Speficify the environment 
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.AssurBoxEnvironments">
+            <summary>
+            List of different AssurBox environenments
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.AssurBoxEnvironments.Test">
+            <summary>
+            Test environment : use this for development 
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.AssurBoxEnvironments.Prod">
+            <summary>
+            Production environment
             </summary>
         </member>
         <member name="T:AssurBox.SDK.AssurBoxException">
@@ -335,13 +375,14 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:AssurBox.SDK.Clients.CarGreenCardClient.GetRequests(System.Int32,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:AssurBox.SDK.Clients.CarGreenCardClient.GetRequests(System.Int32,System.Int32,System.Threading.CancellationToken,AssurBox.SDK.DTO.GreenCard.GreenCardRequestStatus)">
             <summary>
             Gets a list of green card requests for car for the caller
             </summary>
             <param name="offset">default value : 0</param>
             <param name="limit">default value : 50</param>
             <param name="cancellationToken"></param>
+            <param name="status">default value : ALL</param>
             <returns>List of green card requests for car</returns>
         </member>
         <member name="M:AssurBox.SDK.Clients.CarGreenCardClient.GetRequest(System.Guid,System.Threading.CancellationToken)">
@@ -357,6 +398,37 @@
             Gets only the response for one green card request. (not the full request object)
             </summary>
             <param name="correlationId"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.CarGreenCardClient.SendResponse(AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestResponse,System.Threading.CancellationToken)">
+            <summary>
+            To be used by an insurer to post a response
+            </summary>
+            <param name="greenCardResponse"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.IdentityClient.GetCurrentUserName(System.Threading.CancellationToken)">
+            <summary>
+            Gets the user name of the current user
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.IdentityClient.GetCurrentUserOrganization(System.Threading.CancellationToken)">
+            <summary>
+            Gets the organization of the current user
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.SecurityClient.GetBearerToken(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets the bearer token
+            </summary>
+            <param name="clientId"></param>
+            <param name="clientSecret"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
@@ -1283,6 +1355,9 @@
             <summary>
             Represents a green card request
             </summary>
+            <remarks>
+            This is the object that is uses for the webhooks
+            </remarks>
         </member>
         <member name="P:AssurBox.SDK.EndpointContracts.Insurers.GreenCardRequestContract.Requester">
             <summary>

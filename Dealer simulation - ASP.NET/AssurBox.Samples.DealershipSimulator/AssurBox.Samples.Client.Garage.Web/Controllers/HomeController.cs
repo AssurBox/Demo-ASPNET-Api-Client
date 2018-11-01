@@ -1,10 +1,6 @@
 ﻿using AssurBox.Samples.Client.Garage.Web.Core;
 using AssurBox.Samples.Client.Garage.Web.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace AssurBox.Samples.Client.Garage.Web.Controllers
@@ -25,8 +21,7 @@ namespace AssurBox.Samples.Client.Garage.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> Index(CredentialsModel model)
         {
-            // test f
-            using (SDK.Clients.IdentityClient client = new SDK.Clients.IdentityClient(new SDK.AssurBoxClientOptions ()))
+            using (SDK.Clients.SecurityClient client = new SDK.Clients.SecurityClient())
             {
                 var token = await client.GetBearerToken(model.ClientID, model.ClientSecret);
                 SessionManager.BearerToken = token.access_token;
