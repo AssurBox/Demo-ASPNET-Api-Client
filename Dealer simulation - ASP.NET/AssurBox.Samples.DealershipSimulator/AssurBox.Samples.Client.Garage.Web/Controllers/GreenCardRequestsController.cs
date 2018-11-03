@@ -3,8 +3,10 @@ using AssurBox.SDK;
 using AssurBox.SDK.DTO.GreenCard.Car;
 //using Bogus;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -13,20 +15,62 @@ namespace AssurBox.Samples.Client.Garage.Web.Controllers
     public class GreenCardRequestsController : Controller
     {
         // GET: GreenCardRequests
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int page = 0)
         {
             if (string.IsNullOrWhiteSpace(SessionManager.BearerToken))
             {
                 return RedirectToAction("Index", "Home");
             }
+            //if (page < 0)
+            //{
+            //    page = 0;
+            //}
 
+            Stopwatch watch = Stopwatch.StartNew();
             // retrieves the list of requests : note that this is for demo purpose, 
             // in real life application you should keep the correlationid of the greencard request and retrieve the response when the user needs it
-            using (SDK.Clients.CarGreenCardClient client = new SDK.Clients.CarGreenCardClient(SessionManager.BearerToken))
+            using (SDK.Clients.CarGreenCardClient client = new SDK.Clients.CarGreenCardClient(new AssurBoxClientOptions { ApiKey = SessionManager.BearerToken }))
             {
-                var requests = await client.GetRequests();
-                return View(requests);
+                try
+                {
+                    var requests = await client.GetRequests(page);
+
+                    watch.Stop();
+                    ViewBag.Time = watch.ElapsedMilliseconds;
+                    return View(requests);
+                }
+                catch (AssurBoxException aex)
+                {
+                    ViewBag.Errors = GetError(aex);
+                }
             }
+            return View();
+        }
+
+        private string GetError(AssurBoxException aex)
+        {
+            StringBuilder b = new StringBuilder();
+            b.AppendFormat("<p>Error {0} : {1}</p>", aex.ErrorCode, aex.Message);
+            try
+            {
+                if (aex.ErrorDetail != null && aex.ErrorDetail.Error != null)
+                {
+                    b.AppendFormat("<p>Error {0} : {1}</p>", aex.ErrorDetail?.Error?.Code, aex.ErrorDetail?.Error?.Message);
+
+                    foreach (var err in aex.ErrorDetail.Error.Details)
+                    {
+                        b.AppendFormat("<p>Error {0} : {1}</p>", err.Code, err.Message);
+                    }
+                }
+                else
+                {
+                    b.AppendFormat("<p>Error {0} : {1}</p>", aex?.ErrorDetail?.Error?.Code, aex?.ErrorDetail?.Error?.Message);
+                }
+            }
+            catch
+            {
+            }
+            return b.ToString();
         }
 
         // GET: GreenCardRequests/Details/5
@@ -36,7 +80,7 @@ namespace AssurBox.Samples.Client.Garage.Web.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            using (SDK.Clients.CarGreenCardClient client = new SDK.Clients.CarGreenCardClient(SessionManager.BearerToken))
+            using (SDK.Clients.CarGreenCardClient client = new SDK.Clients.CarGreenCardClient(new AssurBoxClientOptions { ApiKey = SessionManager.BearerToken }))
             {
                 var request = await client.GetRequest(id);
                 SaveFilesInTempDir(request);
@@ -47,7 +91,7 @@ namespace AssurBox.Samples.Client.Garage.Web.Controllers
 
         public async Task<FileResult> DownloadSNCADoc(Guid id)
         {
-            using (SDK.Clients.CarGreenCardClient client = new SDK.Clients.CarGreenCardClient(SessionManager.BearerToken))
+            using (SDK.Clients.CarGreenCardClient client = new SDK.Clients.CarGreenCardClient(new AssurBoxClientOptions { ApiKey = SessionManager.BearerToken }))
             {
                 var snca = await client.GetDocumentSNCA(id);
                 return File(Convert.FromBase64String(snca.Content), snca.Type, snca.Filename);
@@ -87,9 +131,20 @@ namespace AssurBox.Samples.Client.Garage.Web.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            using (SDK.Clients.CarGreenCardClient client = new SDK.Clients.CarGreenCardClient(SessionManager.BearerToken))
+            try
             {
-                ViewBag.Insurances = await client.GetInsurancesGreenCardsIssuers();
+                using (SDK.Clients.CarGreenCardClient client = new SDK.Clients.CarGreenCardClient(new AssurBoxClientOptions { ApiKey = SessionManager.BearerToken }))
+                {
+                    ViewBag.Insurances = await client.GetInsurancesGreenCardsIssuers();
+                }
+            }
+            catch (AssurBoxException aex)
+            {
+                ModelState.AddModelError("", aex.Message);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
             }
 
 
@@ -108,7 +163,7 @@ namespace AssurBox.Samples.Client.Garage.Web.Controllers
             }
             if (ModelState.IsValid)
             {
-                using (SDK.Clients.CarGreenCardClient client = new SDK.Clients.CarGreenCardClient(SessionManager.BearerToken))
+                using (SDK.Clients.CarGreenCardClient client = new SDK.Clients.CarGreenCardClient(new AssurBoxClientOptions { ApiKey = SessionManager.BearerToken }))
                 {
                     try
                     {
@@ -139,7 +194,7 @@ namespace AssurBox.Samples.Client.Garage.Web.Controllers
                     }
                 }
             }
-            using (SDK.Clients.CarGreenCardClient client = new SDK.Clients.CarGreenCardClient(SessionManager.BearerToken))
+            using (SDK.Clients.CarGreenCardClient client = new SDK.Clients.CarGreenCardClient(new AssurBoxClientOptions { ApiKey = SessionManager.BearerToken }))
             {
                 ViewBag.Insurances = await client.GetInsurancesGreenCardsIssuers();
             }
@@ -168,7 +223,7 @@ namespace AssurBox.Samples.Client.Garage.Web.Controllers
             }
             if (ModelState.IsValid)
             {
-                using (SDK.Clients.CarGreenCardClient client = new SDK.Clients.CarGreenCardClient(SessionManager.BearerToken))
+                using (SDK.Clients.CarGreenCardClient client = new SDK.Clients.CarGreenCardClient(new AssurBoxClientOptions { ApiKey = SessionManager.BearerToken }))
                 {
                     try
                     {
@@ -216,7 +271,7 @@ namespace AssurBox.Samples.Client.Garage.Web.Controllers
             }
             if (ModelState.IsValid)
             {
-                using (SDK.Clients.CarGreenCardClient client = new SDK.Clients.CarGreenCardClient(SessionManager.BearerToken))
+                using (SDK.Clients.CarGreenCardClient client = new SDK.Clients.CarGreenCardClient(new AssurBoxClientOptions { ApiKey = SessionManager.BearerToken }))
                 {
                     try
                     {
