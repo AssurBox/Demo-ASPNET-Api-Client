@@ -10,6 +10,8 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.Caching;
+using System.Web.Caching;
 using System.Web.Http;
 
 namespace AssurBox.Samples.API.Insurance.Controllers
@@ -44,7 +46,7 @@ namespace AssurBox.Samples.API.Insurance.Controllers
 
             // ici on va récupérer la demande qui vient d'AssurBox, la sauver et confirmer qu'on l'a bien reçue.
             // Si la réception du message n'est pas confirmée, AssurBox va tenter de ré-envoyer le message pendant un temps
-            // et si la réception n'est toujours pas confirmée, il enverra un email "fallback" avec la demande.
+            // et si après un certain nombre de tentatives, la réception n'est toujours pas confirmée, il enverra un email "fallback" avec la demande.
 
             string key = $"{value.CorrelationId}|{value.MessageId}";
 
@@ -55,7 +57,7 @@ namespace AssurBox.Samples.API.Insurance.Controllers
                 {
                     RequestDate = DateTime.UtcNow,
                     RequestId = key,
-                    RawRequest = JsonConvert.SerializeObject(value, Formatting.Indented),
+                    RawRequest = JsonConvert.SerializeObject(value, Formatting.None),
                 });
                 ctx.SaveChanges();
             }
@@ -74,34 +76,17 @@ namespace AssurBox.Samples.API.Insurance.Controllers
 
             Logger.Log($"CarGreenCardController.ExecuteJob - Debut {key}");
 
-            //InsuranceApiCarGreenCardMessage 
-
-            /*
-             *  ^
-             * /!\
-             * ---
-             * 
-             * 
-             Todo : 
-
-            dessiner toutes les relations pour éviter de dupliquer des pocos...
-
-            Il faut une vue globale et claire sinon on s'en sortira pas
-             
-             */
-
             // Ici on va traiter la demande que l'on a sauvegardée 
             // on récupère les infos
             // on crée une carte verte ou tout ce qu'on veut
-            // et on envoie la réponse à AssurBox
-
-            // ici on va utiliser l'api AssurBox pour envoyer la réponse (carte verte)
+            // et on envoie la réponse à AssurBox via l'api
 
             // recherche dans la table 
             using (DAL.ApiDataContext ctx = new DAL.ApiDataContext())
             {
                 var request = ctx.CarGreenCardRequests.FirstOrDefault(x => x.RequestId == key);
                 var requestInformation = JsonConvert.DeserializeObject<SDK.EndpointContracts.Insurers.GreenCardRequestContract>(request.RawRequest);
+                
                 //generer carte verte et l'envoyer
 
                 Logger.Log($"CarGreenCardController.ExecuteJob - request get {request.RequestId}", request.RawRequest);
@@ -113,14 +98,10 @@ namespace AssurBox.Samples.API.Insurance.Controllers
                 }
                 else
                 {
-                    IdentityClient id = new IdentityClient("", Config.AssurBoxApiBaseURL);
+                    var tokenInfo = getToken();
 
-                    var tokenInfo = id.GetBearerToken(Config.AssurBoxApiClientID, Config.AssurBoxApiClientSecret).Result;
-
-                    CarGreenCardClient client = new CarGreenCardClient(tokenInfo.access_token, Config.AssurBoxApiBaseURL);
-
+                    CarGreenCardClient client = new CarGreenCardClient(new AssurBoxClientOptions { Host = Config.AssurBoxApiBaseURL, ApiKey = tokenInfo });
                     var requestDetails = client.GetRequest(requestInformation.CorrelationId).Result;
-
 
                     GreenCardRequestResponse response = new GreenCardRequestResponse();
                     response.CorrelationId = requestInformation.CorrelationId;
@@ -157,8 +138,6 @@ Assurance simulation demo ({requestDetails.InsuranceName})
                     Logger.Log($"CarGreenCardController.ExecuteJob - request fichier attaché");
 
 
-
-
                     var resp = client.SendResponse(response).Result;
 
                     if (requestInformation.CommunicationType == SDK.EndpointContracts.Insurers.CommunicationType.InitialRequest)
@@ -175,6 +154,21 @@ Assurance simulation demo ({requestDetails.InsuranceName})
 
                 Logger.Log($"CarGreenCardController.ExecuteJob - etat sauvé");
             }
+        }
+
+        private string getToken()
+        {
+           
+            string token = MemoryCache.Default["ABX_TOKEN"] as string;
+            if (string.IsNullOrEmpty(token))
+            {
+                SecurityClient id = new SecurityClient(new AssurBoxClientOptions { Host = Config.AssurBoxApiBaseURL });
+                var tokeninfo = id.GetBearerToken(Config.AssurBoxApiClientID, Config.AssurBoxApiClientSecret).Result;
+                token = tokeninfo.access_token;
+                MemoryCache.Default["ABX_TOKEN"] = token;
+            }
+            return token;
+
         }
 
 
