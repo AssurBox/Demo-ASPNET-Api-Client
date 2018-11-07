@@ -46,8 +46,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AssurBox.SDK, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AssurBox.SDK.1.0.2\lib\net461\AssurBox.SDK.dll</HintPath>
+    <Reference Include="AssurBox.SDK, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AssurBox.SDK.1.0.3\lib\net461\AssurBox.SDK.dll</HintPath>
     </Reference>
     <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
@@ -230,9 +230,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CarGreenCardController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
-    <Compile Include="Controllers\EchoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DAL\ApiDataContext.cs" />
     <Compile Include="DAL\CarGreenCardRequest.cs" />
     <Compile Include="DAL\Logs.cs" />

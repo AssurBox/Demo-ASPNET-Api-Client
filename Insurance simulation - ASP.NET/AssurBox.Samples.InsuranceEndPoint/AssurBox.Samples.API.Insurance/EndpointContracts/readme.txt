@@ -1,1 +1,1 @@
-﻿These contracts are for communication FROM AssurBox TO external endpoints (eg: insurance endpoint)
+﻿These contracts are for Requests FROM AssurBox TO external endpoints (eg: insurance endpoint)
