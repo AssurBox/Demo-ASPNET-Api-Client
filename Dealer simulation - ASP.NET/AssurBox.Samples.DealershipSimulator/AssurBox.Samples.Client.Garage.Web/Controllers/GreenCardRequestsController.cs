@@ -15,7 +15,7 @@ namespace AssurBox.Samples.Client.Garage.Web.Controllers
     public class GreenCardRequestsController : Controller
     {
         // GET: GreenCardRequests
-        public async Task<ActionResult> Index(int page = 0)
+        public async Task<ActionResult> Index(int page = 0, SDK.DTO.GreenCard.GreenCardRequestStatus status = SDK.DTO.GreenCard.GreenCardRequestStatus.All)
         {
             if (string.IsNullOrWhiteSpace(SessionManager.BearerToken))
             {
@@ -33,7 +33,7 @@ namespace AssurBox.Samples.Client.Garage.Web.Controllers
             {
                 try
                 {
-                    var requests = await client.GetRequests(page);
+                    var requests = await client.GetRequests(page, 50, new System.Threading.CancellationToken(), status);
 
                     watch.Stop();
                     ViewBag.Time = watch.ElapsedMilliseconds;

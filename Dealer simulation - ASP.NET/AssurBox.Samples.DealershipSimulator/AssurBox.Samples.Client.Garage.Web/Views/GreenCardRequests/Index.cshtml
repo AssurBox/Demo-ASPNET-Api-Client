@@ -12,13 +12,23 @@
     ViewBag.Title = "Requests : " + Model.Total + " (Page N° " + Model.PageNumber + ", items per page : " + Model.PageSize + ")";
 }
 
-
 <div>
     Time : @ViewBag.Time ms
 
 </div>
 
-<a href="@Url.Action("Create")" class="btn btn-primary">Create</a>
+<div class="row">
+    <div class="col-md-6">
+        <a href="@Url.Action("Index",new {page=Model.PageNumber, status=AssurBox.SDK.DTO.GreenCard.GreenCardRequestStatus.All})" class="btn btn-primary">All requests</a>
+        <a href="@Url.Action("Index",new {page=Model.PageNumber, status=AssurBox.SDK.DTO.GreenCard.GreenCardRequestStatus.Finished})" class="btn btn-primary">Finished requests</a>
+        <a href="@Url.Action("Index",new {page=Model.PageNumber, status=AssurBox.SDK.DTO.GreenCard.GreenCardRequestStatus.InProgress})" class="btn btn-primary">Pending requests</a>
+    </div>
+    <div class="col-md-6 text-right">
+
+        <a href="@Url.Action("Create")" class="btn btn-primary">Create a new request</a>
+    </div>
+</div>
+
 <br />
 <table class="table stripped">
     <thead>
