@@ -328,6 +328,13 @@
             <param name="errorCode">HTTP status code.</param>
             <param name="message">Error message.</param>
         </member>
+        <member name="M:AssurBox.SDK.AssurBoxException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
         <member name="T:AssurBox.SDK.Attachment">
             <summary>
             Defines an attachment
@@ -1445,47 +1452,6 @@
             Used vehicle
             </summary>
         </member>
-        <member name="T:AssurBox.SDK.EndpointContracts.Insurers.CommunicationType">
-            <summary>
-            Type of communication
-            </summary>
-        </member>
-        <member name="F:AssurBox.SDK.EndpointContracts.Insurers.CommunicationType.InitialRequest">
-            <summary>
-            Initialization
-            </summary>
-        </member>
-        <member name="F:AssurBox.SDK.EndpointContracts.Insurers.CommunicationType.Modification">
-            <summary>
-            Modification
-            </summary>
-        </member>
-        <member name="F:AssurBox.SDK.EndpointContracts.Insurers.CommunicationType.Cancelation">
-            <summary>
-            Delete/Cancel
-            </summary>
-        </member>
-        <member name="T:AssurBox.SDK.EndpointContracts.Insurers.ApiContract">
-            <summary>
-            Defines a contract to use the Api
-            </summary>
-        </member>
-        <member name="P:AssurBox.SDK.EndpointContracts.Insurers.ApiContract.CorrelationId">
-            <summary>
-            Reference key for communication between AssurBox and other APIs
-            This represents the whole file (ex : the whole green card request)
-            </summary>
-        </member>
-        <member name="P:AssurBox.SDK.EndpointContracts.Insurers.ApiContract.CommunicationType">
-            <summary>
-            Type of communication
-            </summary>
-        </member>
-        <member name="P:AssurBox.SDK.EndpointContracts.Insurers.ApiContract.AttemptCount">
-            <summary>
-            Number of attempt to send data
-            </summary>
-        </member>
         <member name="T:AssurBox.SDK.EndpointContracts.Insurers.CustomerInfo">
             <summary>
             This class is what AssurBox expects if sending a get request on an insurer endpoint to retrieve customer information
@@ -1524,41 +1490,6 @@
         <member name="P:AssurBox.SDK.EndpointContracts.Insurers.CustomerInfo.BirthDate">
             <summary>
             Birthday of the customer
-            </summary>
-        </member>
-        <member name="T:AssurBox.SDK.EndpointContracts.Insurers.GreenCardRequestContract">
-            <summary>
-            Represents a green card request
-            </summary>
-            <remarks>
-            This is the object that is uses for the webhooks
-            </remarks>
-        </member>
-        <member name="P:AssurBox.SDK.EndpointContracts.Insurers.GreenCardRequestContract.Requester">
-            <summary>
-            Requester of the green card
-            </summary>
-        </member>
-        <member name="P:AssurBox.SDK.EndpointContracts.Insurers.GreenCardRequestContract.LicencePlate">
-            <summary>
-            The licence plate (Must respect LU formats : 2 letters + 4 numbers, 4 numbers or 5 numbers)
-            </summary>
-            <remarks>Mandatory</remarks>
-        </member>
-        <member name="P:AssurBox.SDK.EndpointContracts.Insurers.GreenCardRequestContract.VIN">
-            <summary>
-            The Vehicle Identification Number (must be valid : alphanumeric : between 3 and 17 characters, no I,O,Q)
-            </summary>
-            <remarks>Mandatory</remarks>
-        </member>
-        <member name="P:AssurBox.SDK.EndpointContracts.Insurers.GreenCardRequestContract.Communication">
-            <summary>
-            A commmunication for the insurer 
-            </summary>
-        </member>
-        <member name="P:AssurBox.SDK.EndpointContracts.Insurers.GreenCardRequestContract.EffectiveDate">
-            <summary>
-            Date on which the green card should be effective
             </summary>
         </member>
         <member name="T:AssurBox.SDK.Link">
@@ -1698,6 +1629,14 @@
             <param name="innerHandler">A HttpMessageHandler instance to set as the inner handler</param>
             <param name="settings">A ReliabilitySettings instance</param>
         </member>
+        <member name="M:AssurBox.SDK.Reliability.RetryDelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+            <summary>
+            
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="T:AssurBox.SDK.SampleData.DevelopperStartup_DataForTests">
             <summary>
             These data are fore test purpose
@@ -1736,6 +1675,149 @@
             </summary>
             <param name="base64EncodedData"></param>
             <returns></returns>
+        </member>
+        <member name="T:AssurBox.SDK.WebHooks.AssurBoxConstants">
+            <summary>
+            Well-known names and values used in AssurBox receivers and handlers
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.WebHooks.AssurBoxConstants.ReceiverName">
+            <summary>
+            Gets the name of the AssurBox WebHook receiver.
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.WebHooks.AssurBoxWebHook">
+            <summary>
+            Base class for AssurBox WebHooks
+            Describes one or more event notifications received as an Outbound Message from AssurBox.
+            For details about AssurBox's Outbound Messages, see <c>http://assurbox.net/webhooks/</c>.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.WebHooks.AssurBoxWebHook.Id">
+            <summary>
+            Gets or sets the unique ID for this alert.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.WebHooks.AssurBoxWebHook.Name">
+            <summary>
+            Gets or sets the name of the alert.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.WebHooks.AssurBoxWebHook.Description">
+            <summary>
+            Gets or sets a description of the alert.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.WebHooks.AssurBoxWebHook.TimeStamp">
+            <summary>
+            The time the webhook was sent (UTC based)
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.WebHooks.AssurBoxWebHook.TransmissionAttemptCount">
+            <summary>
+            Number of attempt to send data
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.WebHooks.AssurBoxWebHook.ResourceType">
+            <summary>
+            Gets or sets the type of the impacted resource.
+            (eg : Green card request)
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.WebHooks.AssurBoxWebHook.CorrelationId">
+            <summary>
+            Gets or sets the ID of the resource.
+            </summary>
+            <remarks>
+            Reference key for communication between AssurBox and other APIs
+            This represents the whole file (ex : the whole green card request)
+            </remarks>
+        </member>
+        <member name="P:AssurBox.SDK.WebHooks.AssurBoxWebHook.MessageId">
+            <summary>
+            Identifier for this specific message
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.WebHooks.AssurBoxWebHook.RessourceLocation">
+            <summary>
+            Gets or sets a direct link to the resource on the AssurBox Api.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.WebHooks.AssurBoxWebHook.Requester">
+            <summary>
+            Gets or sets the Organization originating this Outbound Message.
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.WebHooks.GreenCardRequestNotification">
+            <summary>
+            Describes one or more event notifications received as an Outbound Message from AssurBox.
+            For details about AssurBox's Outbound Messages, see <c>http://assurbox.net/webhooks/</c>.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.WebHooks.GreenCardRequestNotification.NotificationType">
+            <summary>
+            Gets or sets the type of communication
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.WebHooks.GreenCardRequestNotification.LicencePlate">
+            <summary>
+            The vehicle licence plate (Must respect LU formats : 2 letters + 4 numbers, 4 numbers or 5 numbers)
+            </summary>
+            <remarks>Mandatory</remarks>
+        </member>
+        <member name="P:AssurBox.SDK.WebHooks.GreenCardRequestNotification.VIN">
+            <summary>
+            The Vehicle Identification Number (must be valid : alphanumeric : between 3 and 17 characters, no I,O,Q)
+            </summary>
+            <remarks>Mandatory</remarks>
+        </member>
+        <member name="P:AssurBox.SDK.WebHooks.GreenCardRequestNotification.Communication">
+            <summary>
+            A commmunication for the receiver 
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.WebHooks.GreenCardRequestNotification.EffectiveDate">
+            <summary>
+            Date on which the green card should be effective
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.WebHooks.GreenCardRequestNotificationTypes">
+            <summary>
+            Type of notification for a green card request notification
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.WebHooks.GreenCardRequestNotificationTypes.InitialRequest">
+            <summary>
+            Initialization, very first request
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.WebHooks.GreenCardRequestNotificationTypes.Modification">
+            <summary>
+            Modification, if the first request had a small error
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.WebHooks.GreenCardRequestNotificationTypes.Cancelation">
+            <summary>
+            Delete/Cancel, if the first request was wrong, or if the green card is not required anymore
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.WebHooks.GreenCardRequestNotificationTypes.Retry">
+            <summary>
+            Retry, if no answer was provided in an acceptable time frame
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.WebHooks.GreenCardRequestNotificationTypes.Response">
+            <summary>
+            Response, to the requester
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.WebHooks.GreenCardRequestNotificationTypes.Rejection">
+            <summary>
+            Rejection, if the request cannot be fullfiled by the insurance.
+            </summary>
+            <remarks>
+            A reason for rejection is expected in the <see cref="P:AssurBox.SDK.WebHooks.GreenCardRequestNotification.Communication"/> field.
+            </remarks>
         </member>
     </members>
 </doc>
