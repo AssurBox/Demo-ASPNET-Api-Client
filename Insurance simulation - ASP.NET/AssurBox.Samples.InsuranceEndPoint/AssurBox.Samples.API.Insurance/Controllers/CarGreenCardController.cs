@@ -52,7 +52,7 @@ namespace AssurBox.Samples.API.Insurance.Controllers
         {
             if (value == null)
             {
-                throw new ArgumentNullException(nameof(value));
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Parameter can't be null");
             }
 
             Logger.Log($"CarGreenCardController.Post - Debut {value.CorrelationId}");
