@@ -1,7 +1,39 @@
-﻿<div class="jumbotron">
-    <h1>AssurBox - simulation api assurance Delta</h1>
+﻿@{
+    ViewBag.Title = "Simulation of an insurance information system ";
+}
 
+<div class="jumbotron">
+    <h1>AssurBox Demo (Insurance simulation)</h1>
+    <p class="lead">AssurBox is a B2B communication hub that helps insurances and partners to communicate efficiently on existing processes</p>
+    <p><a href="http://www.assurbox.net?src=demoapiassurancesandbox_jumbotron" target="_blank" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
-<p>
-   
-</p>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Purpose of this application</h2>
+        <p>
+            This application simulates an insurance information system connected to Assurbox
+        </p>
+        <p>
+            AssurBox sends a notification to a specific url of this application. Then this application simulates an insurance system and sends back a green card document to the AssurBox platform.
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h2>This demo</h2>
+        <p>
+            This demo simulates the "Assurance Delta" account.
+            If you choose "Assurance Delta" as insurance for a green card request, the request will arrive here.
+        </p>
+        <p>
+            You can check what requests are send form the sandbox AssurBox application.
+        </p>
+        <p>@Html.ActionLink("Check requests", "Index", "Admin", new { area = "" }, null)</p>
+        
+    </div>
+    <div class="col-md-4">
+        <h2>Code and other demos</h2>
+        <p>The code of this application is available on github</p>
+        <p>We provide demo application for partners (vehicle dealers) and in other languages</p>
+        <p><a class="btn btn-default" target="_blank" href="https://www.github.com/assurbox">Go to github &raquo;</a></p>
+    </div>
+</div>

@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Web;
+using System.IO;
+using System.Reflection;
 
 namespace AssurBox.Samples.API.Insurance
 {
@@ -38,6 +37,15 @@ namespace AssurBox.Samples.API.Insurance
             {
                 return ConfigurationManager.AppSettings["AssurBox:Api:ClientSecret"];
             }
+        }
+
+        public static DateTime GetBuildDate()
+        {
+            UriBuilder uri = new UriBuilder(Assembly.GetExecutingAssembly().CodeBase);
+            return File.GetLastAccessTimeUtc(
+                Path.GetDirectoryName(Uri.UnescapeDataString(uri.Path))
+                );
+
         }
     }
 }

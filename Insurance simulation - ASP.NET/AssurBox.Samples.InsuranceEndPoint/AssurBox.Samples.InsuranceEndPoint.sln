@@ -12,6 +12,7 @@ Global
 		Debug|Any CPU = Debug|Any CPU
 		Demo|Any CPU = Demo|Any CPU
 		Release|Any CPU = Release|Any CPU
+		sandbox|Any CPU = sandbox|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{886A5F26-7F09-4ACC-A33C-94DECD9E8CFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -23,12 +24,17 @@ Global
 		{886A5F26-7F09-4ACC-A33C-94DECD9E8CFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{886A5F26-7F09-4ACC-A33C-94DECD9E8CFB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{886A5F26-7F09-4ACC-A33C-94DECD9E8CFB}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{886A5F26-7F09-4ACC-A33C-94DECD9E8CFB}.sandbox|Any CPU.ActiveCfg = sandbox|Any CPU
+		{886A5F26-7F09-4ACC-A33C-94DECD9E8CFB}.sandbox|Any CPU.Build.0 = sandbox|Any CPU
+		{886A5F26-7F09-4ACC-A33C-94DECD9E8CFB}.sandbox|Any CPU.Deploy.0 = sandbox|Any CPU
 		{23919174-4EA4-4596-ACE8-DA428B4DC774}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{23919174-4EA4-4596-ACE8-DA428B4DC774}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23919174-4EA4-4596-ACE8-DA428B4DC774}.Demo|Any CPU.ActiveCfg = Demo|Any CPU
 		{23919174-4EA4-4596-ACE8-DA428B4DC774}.Demo|Any CPU.Build.0 = Demo|Any CPU
 		{23919174-4EA4-4596-ACE8-DA428B4DC774}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23919174-4EA4-4596-ACE8-DA428B4DC774}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23919174-4EA4-4596-ACE8-DA428B4DC774}.sandbox|Any CPU.ActiveCfg = sandbox|Any CPU
+		{23919174-4EA4-4596-ACE8-DA428B4DC774}.sandbox|Any CPU.Build.0 = sandbox|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
