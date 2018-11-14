@@ -12,6 +12,7 @@ namespace AssurBox.Samples.Client.Garage.Web.Controllers
         /// <param name="notification"></param>
         /// <returns></returns>
         [Route("assurboxwebhook")]
+        [HttpPost]
         public HttpStatusCodeResult AssurBoxWebHook(AssurBox.SDK.WebHooks.GreenCardRequestNotification notification)
         {
             // do someting with the notification
@@ -20,7 +21,7 @@ namespace AssurBox.Samples.Client.Garage.Web.Controllers
 
 
             var clients = GlobalHost.ConnectionManager.GetHubContext<Hubs.NotificationHub>().Clients;
-            clients.All.broadcastMessage("Nofification from AssurBox for Licence plate " + notification.LicencePlate, notification.Communication);
+            clients.All.broadcastMessage("Notification from AssurBox for Licence plate " + notification.LicencePlate, notification.Communication);
 
             return new HttpStatusCodeResult(HttpStatusCode.OK); // should answer to AssurBox with a HTTP 200
         }
