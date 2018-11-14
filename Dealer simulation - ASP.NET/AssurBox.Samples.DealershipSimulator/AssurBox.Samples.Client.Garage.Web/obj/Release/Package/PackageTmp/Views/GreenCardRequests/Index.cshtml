@@ -1,0 +1,114 @@
+﻿@model AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestSummary
+
+@if (ViewBag.Errors !=null)
+{
+    <div class="alert alert-danger">
+        @Html.Raw(ViewBag.Errors)
+    </div>
+    return;
+}
+
+@{
+    ViewBag.Title = "Requests : " + Model.Total + " (Page N° " + Model.PageNumber + ", items per page : " + Model.PageSize + ")";
+}
+
+<div>
+    Time : @ViewBag.Time ms
+
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <a href="@Url.Action("Index",new {page=Model.PageNumber, status=AssurBox.SDK.DTO.GreenCard.GreenCardRequestStatus.All})" class="btn btn-primary">All requests</a>
+        <a href="@Url.Action("Index",new {page=Model.PageNumber, status=AssurBox.SDK.DTO.GreenCard.GreenCardRequestStatus.Finished})" class="btn btn-primary">Finished requests</a>
+        <a href="@Url.Action("Index",new {page=Model.PageNumber, status=AssurBox.SDK.DTO.GreenCard.GreenCardRequestStatus.InProgress})" class="btn btn-primary">Pending requests</a>
+    </div>
+    <div class="col-md-6 text-right">
+
+        <a href="@Url.Action("Create")" class="btn btn-primary">Create a new request</a>
+    </div>
+</div>
+
+<br />
+<table class="table stripped">
+    <thead>
+        <tr>
+            <th>Licence plate</th>
+            <th>VIN</th>
+            <th>CustomerName</th>
+            <th>RequestDate</th>
+            <th>HasResponse</th>
+            <th>InsuranceName</th>
+            <th>SenderOrganizationName</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var request in Model.Data)
+        {
+            <tr>
+                <td>
+                    @request.LicencePlate
+                </td>
+                <td>
+                    @request.VIN
+                </td>
+                <td>
+                    @request.CustomerName
+                </td>
+                <td>
+                    @request.RequestDate
+                </td>
+                <td>
+                    @request.HasResponse
+                </td>
+                <td>
+                    @request.InsuranceName
+                </td>
+                <td>
+                    @request.SenderOrganizationName
+                </td>
+                <td>
+                    <a href="@Url.Action("DownloadSNCADoc", new { id = request.CorrelationId })">doc snca</a>
+                </td>
+                <td>
+                    @Html.ActionLink("Detail", "Details", new { id = request.CorrelationId }) |
+                    @Html.ActionLink("Edit", "Edit", new { id = request.CorrelationId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = request.CorrelationId })
+
+
+
+
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        <li>
+            <a href="@Url.Action("Index",new { page=Model.PageNumber-1})" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        @{
+            int pages = Model.Total / Model.PageSize;
+        }
+
+        @for (int i = 0; i < pages; i++)
+        {
+            <li @(i == Model.PageNumber ? "class=active" : "")><a href="@Url.Action("Index",new { page=i})">@i</a></li>
+        }
+
+
+        <li>
+            <a href="@Url.Action("Index",new { page=Model.PageNumber+1})" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+

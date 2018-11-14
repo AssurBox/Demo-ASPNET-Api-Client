@@ -1,5 +1,6 @@
 ﻿using AssurBox.Samples.Client.Garage.Web.Core;
 using AssurBox.Samples.Client.Garage.Web.Models;
+using Microsoft.AspNet.SignalR;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -9,11 +10,10 @@ namespace AssurBox.Samples.Client.Garage.Web.Controllers
     {
         public async Task<ActionResult> Index()
         {
-            // Dev data : demo account
             CredentialsModel model = new CredentialsModel
             {
-                ClientID = "Mk8znT1xbFTWghTx82vc2g==",
-                ClientSecret = "NTjH6WtvYaVmBCpx9+9VGj7hGoDFCpIIBehPBg7K604YQFzIPoxr+TbST+R2qI/GAgVzayfYoytNbv6EO61sfQ=="
+                ClientID = Config.AssurBoxApiClientID,
+                ClientSecret = Config.AssurBoxApiClientSecret
             };
             return View(model);
         }
@@ -21,7 +21,8 @@ namespace AssurBox.Samples.Client.Garage.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> Index(CredentialsModel model)
         {
-            using (SDK.Clients.SecurityClient client = new SDK.Clients.SecurityClient())
+            // AssurBoxEnvironments.Test targets https://sandbox.assurbox.net
+            using (SDK.Clients.SecurityClient client = new SDK.Clients.SecurityClient(new SDK.AssurBoxClientOptions(SDK.AssurBoxEnvironments.Test)))
             {
                 var token = await client.GetBearerToken(model.ClientID, model.ClientSecret);
                 SessionManager.BearerToken = token.access_token;
@@ -40,7 +41,7 @@ namespace AssurBox.Samples.Client.Garage.Web.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Contact us for any question or request.";
-
+            
             return View();
         }
     }

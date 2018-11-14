@@ -1,0 +1,95 @@
+﻿@model AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInfo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>GreenCardRequestInfo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+
+
+        <!--Developers data:-->
+        @Html.HiddenFor(model => model.CorrelationId)
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LicencePlate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LicencePlate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RequestDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RequestDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InsuranceName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InsuranceName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SenderOrganizationName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SenderOrganizationName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HasResponse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HasResponse)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResponseCommunication)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResponseCommunication)
+        </dd>
+        <dt>
+            Attachments
+        </dt>
+
+        <dd>
+            @if (Model.Attachments != null)
+            {
+                foreach (var att in Model.Attachments)
+                {
+                    <div><a href="@Url.Content($"/tempdir/{Model.CorrelationId}{att.Filename}")" target="_blank">@att.Filename</a> </div>
+                }
+            }
+            <br />
+            <a href="@Url.Action("DownloadSNCADoc",new { id = Model.CorrelationId })">doc snca</a>
+        </dd>
+    </dl>
+    
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
