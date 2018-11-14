@@ -558,18 +558,6 @@
             Provides methods to authenticate in AssurBox
             </summary>
         </member>
-        <member name="M:AssurBox.SDK.Clients.SecurityClient.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:AssurBox.SDK.Clients.SecurityClient"/> class.
-            </summary>
-        </member>
-        <member name="M:AssurBox.SDK.Clients.SecurityClient.#ctor(System.Net.Http.HttpClient)">
-            <summary>
-            Initializes a new instance of the <see cref="T:AssurBox.SDK.Clients.SecurityClient"/> class.
-            </summary>
-            <param name="client">An optional http client which may me injected in order to facilitate testing.</param>
-            <returns>Interface to the AssurBox REST API</returns>
-        </member>
         <member name="M:AssurBox.SDK.Clients.SecurityClient.#ctor(System.Net.Http.HttpClient,AssurBox.SDK.AssurBoxClientOptions)">
             <summary>
             Initializes a new instance of the <see cref="T:AssurBox.SDK.Clients.SecurityClient"/> class.

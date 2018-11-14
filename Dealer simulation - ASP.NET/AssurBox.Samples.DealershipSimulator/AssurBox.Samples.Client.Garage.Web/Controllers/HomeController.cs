@@ -1,6 +1,8 @@
 ﻿using AssurBox.Samples.Client.Garage.Web.Core;
 using AssurBox.Samples.Client.Garage.Web.Models;
-using Microsoft.AspNet.SignalR;
+using AssurBox.SDK;
+using AssurBox.SDK.Clients;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -8,7 +10,7 @@ namespace AssurBox.Samples.Client.Garage.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
             CredentialsModel model = new CredentialsModel
             {
@@ -19,10 +21,11 @@ namespace AssurBox.Samples.Client.Garage.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Index(CredentialsModel model)
+        public async Task<ActionResult> Index(CredentialsModel model)//
         {
+            
             // AssurBoxEnvironments.Test targets https://sandbox.assurbox.net
-            using (SDK.Clients.SecurityClient client = new SDK.Clients.SecurityClient(new SDK.AssurBoxClientOptions(SDK.AssurBoxEnvironments.Test)))
+            using (SecurityClient client = new SecurityClient(new AssurBoxClientOptions (AssurBoxEnvironments.Test)))
             {
                 var token = await client.GetBearerToken(model.ClientID, model.ClientSecret);
                 SessionManager.BearerToken = token.access_token;
@@ -41,7 +44,7 @@ namespace AssurBox.Samples.Client.Garage.Web.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Contact us for any question or request.";
-            
+
             return View();
         }
     }
