@@ -3,4 +3,4 @@ Simple application to demonstrate the use of the AssurBox Api in the context of 
 
 Try it live here :
 
-http://demo-aspnet-dealers.assurbox.net.lilac.arvixe.com/
+http://sandbox-dealership.assurbox.net
