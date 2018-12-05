@@ -109,3 +109,4 @@ D:\GitHub\Demo-Csharp-Api-Client\Dealer simulation - ASP.NET\AssurBox.Samples.De
 D:\GitHub\Demo-Csharp-Api-Client\Dealer simulation - ASP.NET\AssurBox.Samples.DealershipSimulator\AssurBox.Samples.Client.Garage.Web\obj\Release\AssurBox.Samples.Client.Garage.Web.csproj.CopyComplete
 D:\GitHub\Demo-Csharp-Api-Client\Dealer simulation - ASP.NET\AssurBox.Samples.DealershipSimulator\AssurBox.Samples.Client.Garage.Web\obj\Release\AssurBox.Samples.Client.Garage.Web.dll
 D:\GitHub\Demo-Csharp-Api-Client\Dealer simulation - ASP.NET\AssurBox.Samples.DealershipSimulator\AssurBox.Samples.Client.Garage.Web\obj\Release\AssurBox.Samples.Client.Garage.Web.pdb
+D:\GitHub\Demo-Csharp-Api-Client\Dealer simulation - ASP.NET\AssurBox.Samples.DealershipSimulator\AssurBox.Samples.Client.Garage.Web\obj\Release\AssurBox.Samples.Client.Garage.Web.csprojAssemblyReference.cache

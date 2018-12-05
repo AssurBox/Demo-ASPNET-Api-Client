@@ -15,7 +15,7 @@ namespace AssurBox.Samples.API.Insurance.Controllers
             using (DAL.ApiDataContext ctx = new DAL.ApiDataContext())
             {
                 model.Requests = await ctx.CarGreenCardRequests.AsNoTracking()
-                    .OrderByDescending(x => x.RequestDate).ToListAsync();
+                    .OrderByDescending(x => x.RequestDate).Take(200).ToListAsync();
             }
             return View(model);
         }
