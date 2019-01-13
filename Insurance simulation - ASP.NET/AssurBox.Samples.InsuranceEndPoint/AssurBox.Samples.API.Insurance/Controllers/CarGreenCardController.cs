@@ -40,7 +40,7 @@ namespace AssurBox.Samples.API.Insurance.Controllers
         /// <returns></returns>
         /// <remarks>
         /// /!\ you need to configure the webhook url in Assurbox 
-        /// <see href=""/> url screenshots !
+        /// <see href="http://assurbox.net/developers-insurances-green-card-request-scenario-webhook-happy-flow/"/> 
         /// 
         /// ici on va récupérer la demande qui vient d'AssurBox, la sauver et confirmer qu'on l'a bien reçue.
         /// Si la réception du message n'est pas confirmée, AssurBox va tenter de ré-envoyer le message pendant un temps
@@ -341,9 +341,9 @@ namespace AssurBox.Samples.API.Insurance.Controllers
                 pdfFormFields.SetField(CarteVerteSimulationFields.VIN, request.VIN);
 
                 string infos = "";
-                if (request.RequestDetails.Customer.IsCompany)
+                if (request.RequestDetails.VehicleOwner.IsCompany)
                 {
-                    infos = $@"CREATION  Preneur COMPANY : {request.RequestDetails.Customer.Company.Name} 
+                    infos = $@"CREATION  Client COMPANY : {request.RequestDetails.VehicleOwner.Company.Name} 
 
 Vehicule : {request.RequestDetails.CarDetails.Make} {request.RequestDetails.CarDetails.Model}
 
@@ -352,7 +352,7 @@ Généré le {DateTime.UtcNow} (UTC)
                 }
                 else
                 {
-                    infos = $@"CREATION  Preneur : {request.RequestDetails.Customer.Person.FirstName} {request.RequestDetails.Customer.Person.LastName} 
+                    infos = $@"CREATION  Client : {request.RequestDetails.VehicleOwner.Person.FirstName} {request.RequestDetails.VehicleOwner.Person.LastName} 
 
 Vehicule : {request.RequestDetails.CarDetails.Make} {request.RequestDetails.CarDetails.Model}
 
