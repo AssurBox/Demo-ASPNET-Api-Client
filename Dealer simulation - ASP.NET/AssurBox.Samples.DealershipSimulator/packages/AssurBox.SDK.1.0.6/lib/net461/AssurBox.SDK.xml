@@ -715,6 +715,14 @@
             LU22548649
             </example>
         </member>
+        <member name="P:AssurBox.SDK.DTO.Company.NationalIdentityNumber">
+            <summary>
+            National identity number of the company
+            https://impotsdirects.public.lu/fr/az/n/num__ro_dossier.html
+            Le numéro d’identification nationale luxembourgois des personnes morales (PM) est également connu sous le nom de «matricule» ou «numéro d’identification personnelle» à 11 positions. En ce qui concerne les impôts directs, ce « matricule » peut également servir de numéro d'identification fiscale (NIF ou TIN, tax identification number). Sa structure reprend l’année de constitution et la forme juridique de la personne morale. Les cinq derniers chiffres sont aléatoires AAAA FF XX XXX.
+            Ce numéro de dossier à 11 chiffres est à indiquer dans tous les rapports avec les bureau compétents de L'ACD. 
+            </summary>
+        </member>
         <member name="P:AssurBox.SDK.DTO.Company.Email">
             <summary>
             Email of the <see cref="T:AssurBox.SDK.DTO.Company"/>
@@ -934,21 +942,22 @@
             Details of the car
             </summary>
         </member>
-        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInitialization.Customer">
-            <summary>
-            Customer for the card request
-            </summary>
-        </member>
-        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInitialization.Driver">
-            <summary>
-            Information about the driver of the car 
-            (if the driver is different from the customer, or if the customer is a company)
-            </summary>
-        </member>
-        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInitialization.OwnerIfDifferentFromCustomer">
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInitialization.VehicleOwner">
             <summary>
             Information about the owner of the vehicle.
             In the case of a leasing, it should be the leasing information
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInitialization.VehicleDriver">
+            <summary>
+            Information about the driver of the car 
+            (if the driver is different from the owner and the holder, or if the holder is a company)
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInitialization.VehicleHolder">
+            <summary>
+            Holder of the vehicle
+            (In case of a leasing, the company or the person that rents the vehicle)
             </summary>
         </member>
         <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInitialization.Communication">
@@ -1240,11 +1249,22 @@
         <member name="P:AssurBox.SDK.DTO.Person.NationalIdentityNumber">
             <summary>
             National identity number of the <see cref="T:AssurBox.SDK.DTO.Person"/>
+            https://impotsdirects.public.lu/fr/az/n/num__ro_dossier.html
             </summary>
         </member>
         <member name="T:AssurBox.SDK.DTO.Vehicle">
             <summary>
             Reprensents a vehicle
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Vehicle.VehicleCategory">
+            <summary>
+            Category of the vehicle
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Vehicle.Bodywork">
+            <summary>
+            Bodywork of the vehicle
             </summary>
         </member>
         <member name="P:AssurBox.SDK.DTO.Vehicle.LicencePlate">
@@ -1294,9 +1314,9 @@
             If it's an used vehicle (<see cref="P:AssurBox.SDK.DTO.Vehicle.VehicleAcquisitionType"/> == 2)
             </summary>
         </member>
-        <member name="P:AssurBox.SDK.DTO.Vehicle.DateOfVehicleRegistration">
+        <member name="P:AssurBox.SDK.DTO.Vehicle.DateOfFirstRegistration">
             <summary>
-            Date of the registration of the vehicle
+            Date of the first registration of the vehicle
             </summary>
         </member>
         <member name="P:AssurBox.SDK.DTO.Vehicle.Make">
@@ -1304,7 +1324,7 @@
             Make of the vehicle
             </summary>
             <example>
-            volkswagen
+            volkswagen, bmw, volvo
             </example>
         </member>
         <member name="P:AssurBox.SDK.DTO.Vehicle.Model">
@@ -1314,7 +1334,13 @@
         </member>
         <member name="P:AssurBox.SDK.DTO.Vehicle.Version">
             <summary>
-            Model's version
+            Model's version "commercial name"
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Vehicle.PriceIncludesVAT">
+            <summary>
+            Indicates if the price is provided with TVA
+            (if true: TVA is included)
             </summary>
         </member>
         <member name="P:AssurBox.SDK.DTO.Vehicle.PriceWithOption">
@@ -1329,17 +1355,12 @@
         </member>
         <member name="P:AssurBox.SDK.DTO.Vehicle.EngineSizeInCm3">
             <summary>
-            Engine size (cm³)
+            Engine capacity, or Engine size (cm³)
             </summary>
         </member>
         <member name="P:AssurBox.SDK.DTO.Vehicle.EnginePowerInKw">
             <summary>
             Engine power (kw)
-            </summary>
-        </member>
-        <member name="P:AssurBox.SDK.DTO.Vehicle.EnginePowerInCH">
-            <summary>
-            Engine power (ch)
             </summary>
         </member>
         <member name="P:AssurBox.SDK.DTO.Vehicle.Fuel">
@@ -1400,9 +1421,15 @@
             </list>
             </remarks>
         </member>
-        <member name="P:AssurBox.SDK.DTO.Vehicle.UnloadedWeightInKg">
+        <member name="P:AssurBox.SDK.DTO.Vehicle.RunningOrderMassInKg">
             <summary>
-            Weight (kg) - unloaded
+            Mass in running order (kg) - unloaded
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Vehicle.MaximumMassInKg">
+            <summary>
+            Technically permissible maximum laden mass (Kg)
+            In french : "MMA -> Masse maximale autorisée"
             </summary>
         </member>
         <member name="P:AssurBox.SDK.DTO.Vehicle.NumberOfDoors">
@@ -1418,6 +1445,16 @@
         <member name="P:AssurBox.SDK.DTO.Vehicle.NumberOfBackSeats">
             <summary>
             Number of seats in the back of the vehicle
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Vehicle.Color">
+            <summary>
+            Color of the vehicle
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Vehicle.CO2">
+            <summary>
+            CO2 emission in g/km 
             </summary>
         </member>
         <member name="T:AssurBox.SDK.DTO.VehicleAcquisitionType">
@@ -1639,9 +1676,9 @@
             </remarks>
             <returns></returns>
         </member>
-        <member name="M:AssurBox.SDK.SampleData.DevelopperStartup_DataForTests.GetSampleData_ORD">
+        <member name="M:AssurBox.SDK.SampleData.DevelopperStartup_DataForTests.GetSampleData_Leasing">
             <summary>
-            Get sample data for a partner (ord)
+            Get sample data for a Leasing
             </summary>
             <returns></returns>
         </member>

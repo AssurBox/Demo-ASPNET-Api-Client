@@ -44,5 +44,11 @@ namespace AssurBox.Samples.Client.Garage.Web
                 );
 
         }
+
+        public static string GetAssurBoxSDKVersion()
+        {
+            return Assembly.GetAssembly(typeof(AssurBox.SDK.ApiError)).GetName().Version.ToString();
+
+        }
     }
 }

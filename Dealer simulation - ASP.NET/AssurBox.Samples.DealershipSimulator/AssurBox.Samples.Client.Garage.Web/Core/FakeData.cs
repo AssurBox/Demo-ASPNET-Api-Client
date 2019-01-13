@@ -2,9 +2,6 @@
 using AssurBox.SDK.DTO.GreenCard.Car;
 using Bogus;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace AssurBox.Samples.Client.Garage.Web.Core
 {
@@ -29,15 +26,19 @@ namespace AssurBox.Samples.Client.Garage.Web.Core
 
 
             var fakeCarDetails = new Faker<Car>().
-                RuleFor(c => c.DateOfVehicleRegistration, c => c.Date.Past(5))
+                RuleFor(c => c.DateOfFirstRegistration, c => c.Date.Past(5))
                 .RuleFor(c => c.Fuel, c => c.PickRandom<FuelTypes>())
                 .RuleFor(c => c.Make, cars[carindex].Make)
                 .RuleFor(c => c.Model, cars[carindex].Model)
                 .RuleFor(c => c.Version, cars[carindex].Version)
-                .RuleFor(c => c.EnginePowerInCH, c => c.Random.Int(75, 190))
+                .RuleFor(c => c.CO2, c => c.Random.Int(20, 200))
+                .RuleFor(c => c.EnginePowerInKw, c => c.Random.Int(75, 190))
                 .RuleFor(c => c.EngineSizeInCm3, c => c.Random.Int(999, 3000))
-                .RuleFor(c => c.UnloadedWeightInKg, c => c.Random.Int(955, 2020))
+                .RuleFor(c => c.RunningOrderMassInKg, c => c.Random.Int(955, 2020))
+                .RuleFor(c => c.NumberOfFrontSeats, c => c.Random.Int(2, 3))
+                .RuleFor(c => c.NumberOfBackSeats, c => c.Random.Int(2, 6))
                 .RuleFor(c => c.PriceWithOption, c => c.Random.Int(20000, 95000).ToString())
+                .RuleFor(c => c.PriceIncludesVAT, true)
                 //.RuleFor(c=>c.UsedVehicleMileage)
                 // occaz ?
                 ;
@@ -55,7 +56,7 @@ namespace AssurBox.Samples.Client.Garage.Web.Core
               .RuleFor(c => c.Email, c => c.Person.Email)
               .RuleFor(c => c.BirthDate, c => c.Person.DateOfBirth)
               .RuleFor(c => c.Address, fakeAddress.Generate())
-              .RuleFor(c=> c.NationalIdentityNumber, c=>c.Random.AlphaNumeric(13))
+              .RuleFor(c => c.DrivingLicenseNumber, c => c.Random.AlphaNumeric(13))
               ;
 
             var fakeCustomer = new Faker<Customer>().
@@ -64,20 +65,18 @@ namespace AssurBox.Samples.Client.Garage.Web.Core
 
             var fakeRequest = new Faker<GreenCardRequestInitialization>()
                   .RuleFor(u => u.CarDetails, f => fakeCarDetails.Generate())
-                  .RuleFor(u => u.Customer, f => fakeCustomer.Generate())
+                  .RuleFor(u => u.VehicleOwner, f => fakeCustomer.Generate())
                   ;
 
             var fakeGreenCardRequestInitialization = fakeRequest.Generate();
 
             // fix some values
-
-            //1 kilowatt is equal to 1.34102209 hp.
-            fakeGreenCardRequestInitialization.CarDetails.EnginePowerInKw = Math.Round( fakeGreenCardRequestInitialization.CarDetails.EnginePowerInCH * 1.34102209);
+            fakeGreenCardRequestInitialization.CarDetails.MaximumMassInKg = fakeGreenCardRequestInitialization.CarDetails.RunningOrderMassInKg + r.Int(500, 1500);
             fakeGreenCardRequestInitialization.CarDetails.PriceWithoutOption = (Convert.ToInt32(fakeGreenCardRequestInitialization.CarDetails.PriceWithOption) - r.Int(500, 5000)).ToString();
-            fakeGreenCardRequestInitialization.Customer.Person.DrivingLicenseNumber = $"{fakeGreenCardRequestInitialization.Customer.Person.BirthDate}xxxx";
+            fakeGreenCardRequestInitialization.VehicleOwner.Person.NationalIdentityNumber = $"{fakeGreenCardRequestInitialization.VehicleOwner.Person.BirthDate}XXXXX";
             fakeGreenCardRequestInitialization.EffectiveDate = DateTime.Today;
             return fakeGreenCardRequestInitialization;
         }
-       
+
     }
 }
