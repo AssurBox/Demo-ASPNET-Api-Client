@@ -230,6 +230,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CarGreenCardController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
+    <Compile Include="Controllers\CoverageCheckController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DAL\ApiDataContext.cs" />
     <Compile Include="DAL\CarGreenCardRequest.cs" />
