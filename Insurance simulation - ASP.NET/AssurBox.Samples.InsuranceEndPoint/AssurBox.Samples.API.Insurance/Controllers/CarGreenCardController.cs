@@ -203,16 +203,25 @@ namespace AssurBox.Samples.API.Insurance.Controllers
 
         private bool ValidateRequest(GreenCardRequestNotification assurBoxNotification, out string validationMessage)
         {
-            // in order to test, we defined that "THROWERROR" in the communication should simulate a bad request
-            if (string.IsNullOrEmpty(assurBoxNotification.Communication) == false
-                && assurBoxNotification.Communication.StartsWith("THROWERROR", StringComparison.InvariantCultureIgnoreCase))
+            validationMessage = string.Empty;
+            // in order to test, we defined that some Licence Plates should simulate a bad request
+            switch (assurBoxNotification.LicencePlate.ToUpper())
             {
-                validationMessage = "Validation Error : we can't issue a green card for this client.";
-                return false;
+                case "ER0404":
+                    {
+                        validationMessage = "Validation Error : we can't issue a green card for this client.";
+                    }
+                    break;
+                case "ER0403":
+                    {
+                        validationMessage = "Validation Error : we can't issue a green card for this vehicle.";
+                    }
+                    break;
+                default: break;
             }
 
-            validationMessage = string.Empty;
-            return true;
+
+            return string.IsNullOrEmpty(validationMessage);
         }
 
         /// <summary>
@@ -241,7 +250,7 @@ namespace AssurBox.Samples.API.Insurance.Controllers
             response.CorrelationId = assurBoxNotification.CorrelationId;
             // The messageid identify a specific message (this is mandatory)
             response.MessageId = assurBoxNotification.MessageId;
-            
+
             response.HasApproval = true; // don't forget to set this property to true
 
             // define a message for the requester
