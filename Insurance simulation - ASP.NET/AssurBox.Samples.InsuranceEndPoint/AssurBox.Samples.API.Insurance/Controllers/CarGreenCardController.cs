@@ -105,7 +105,6 @@ namespace AssurBox.Samples.API.Insurance.Controllers
                     {
                         // generates a sample green card and send it back to AssurBox
                         ProcessInitialRequest(key, assurBoxNotification);
-
                     }
                     break;
                 case SDK.WebHooks.GreenCardRequestNotificationTypes.Modification:
@@ -251,10 +250,20 @@ namespace AssurBox.Samples.API.Insurance.Controllers
             // The messageid identify a specific message (this is mandatory)
             response.MessageId = assurBoxNotification.MessageId;
 
-            response.HasApproval = true; // don't forget to set this property to true
+            string validationMessage;
+            if (ValidateRequest(assurBoxNotification, out validationMessage) == false)
+            {
+                // We can send a response refusing to issue a green card
+                response.HasApproval = false;
+                response.ApprovalReason = validationMessage;
+                response.ResponseContent = validationMessage;
+            }
+            else
+            {
+                response.HasApproval = true; // don't forget to set this property to true
 
-            // define a message for the requester
-            response.ResponseContent = $@"
+                // define a message for the requester
+                response.ResponseContent = $@"
                     Bonjour {assurBoxNotification.Requester.Name},
 
                     Merci pour votre demande, (type : {assurBoxNotification.NotificationType})
@@ -267,9 +276,9 @@ namespace AssurBox.Samples.API.Insurance.Controllers
                     Assurance simulation demo ({requestDetails.InsuranceName})
                     ";
 
-            // make sure the file is encoded as a base64 string
-            response.AddAttachment($"CarteVerte_{assurBoxNotification.LicencePlate}.pdf", Convert.ToBase64String(document));
-
+                // make sure the file is encoded as a base64 string
+                response.AddAttachment($"CarteVerte_{assurBoxNotification.LicencePlate}.pdf", Convert.ToBase64String(document));
+            }
 
             // send the response to AssurBox
             var resp = client.SendResponse(response).Result;
