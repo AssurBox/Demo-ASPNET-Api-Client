@@ -138,7 +138,7 @@ namespace AssurBox.Samples.API.Insurance.Controllers
         private void ProcessInitialRequest(string key, GreenCardRequestNotification assurBoxNotification)
         {
             // 1. retrieve a token to access the AssurBox Api
-            var tokenInfo = GetAssurBoxSecurityToken();
+            var tokenInfo = AssurBoxSecurity.GetAssurBoxSecurityToken();
 
             // 2. using the token, create a "greencard client"
             CarGreenCardClient client = new CarGreenCardClient(new AssurBoxClientOptions { Host = Config.AssurBoxApiBaseURL, ApiKey = tokenInfo });
@@ -231,7 +231,7 @@ namespace AssurBox.Samples.API.Insurance.Controllers
         private void ProcessModificationRequest(string key, GreenCardRequestNotification assurBoxNotification)
         {
             // 1. retrieve a token to access the AssurBox Api
-            var tokenInfo = GetAssurBoxSecurityToken();
+            var tokenInfo = AssurBoxSecurity.GetAssurBoxSecurityToken();
 
             // 2. using the token, create a "greencard client"
             CarGreenCardClient client = new CarGreenCardClient(new AssurBoxClientOptions { Host = Config.AssurBoxApiBaseURL, ApiKey = tokenInfo });
@@ -308,24 +308,6 @@ namespace AssurBox.Samples.API.Insurance.Controllers
             }
         }
 
-        /// <summary>
-        /// Gets the JWT token to communicate with AssurBox
-        /// </summary>
-        /// <returns></returns>
-        private string GetAssurBoxSecurityToken()
-        {
-
-            string token = MemoryCache.Default["ABX_TOKEN"] as string;
-            if (string.IsNullOrEmpty(token))
-            {
-                SecurityClient id = new SecurityClient(new AssurBoxClientOptions { Host = Config.AssurBoxApiBaseURL });
-                var tokeninfo = id.GetBearerToken(Config.AssurBoxApiClientID, Config.AssurBoxApiClientSecret).Result;
-                token = tokeninfo.access_token;
-                MemoryCache.Default["ABX_TOKEN"] = token;
-            }
-            return token;
-
-        }
 
 
 

@@ -5,6 +5,19 @@ using System.Web.Http;
 
 namespace AssurBox.Samples.API.Insurance.Controllers
 {
+
+    /*
+     
+         Experimental
+
+        Work in progress
+         
+         
+         */
+
+
+
+
     // ?risk=&identifiertype=&identifier=&cover=&cover=
     /// <summary>
     /// This is the endpoint to configure in AssurBox by the insurance
