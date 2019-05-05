@@ -1,0 +1,2378 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AssurBox.SDK</name>
+    </assembly>
+    <members>
+        <member name="T:AssurBox.SDK.ApiError">
+            <summary>
+             ApiError from Microsoft API guidelines
+             <see href="https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#710-response-formats"/>
+            </summary>
+        </member>
+        <member name="M:AssurBox.SDK.ApiError.#ctor">
+            <summary>
+            Creates a new instance of the <see cref="T:AssurBox.SDK.ApiError"/> class.
+            </summary>
+        </member>
+        <member name="M:AssurBox.SDK.ApiError.#ctor(System.String,System.String)">
+            <summary>
+            Creates a new instance of the <see cref="T:AssurBox.SDK.ApiError"/> class.
+            </summary>
+            <param name="errorCode"></param>
+            <param name="message"></param>
+        </member>
+        <member name="M:AssurBox.SDK.ApiError.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Creates a new instance of the <see cref="T:AssurBox.SDK.ApiError"/> class.
+            </summary>
+            <param name="errorCode"></param>
+            <param name="message"></param>
+            <param name="target"></param>
+        </member>
+        <member name="P:AssurBox.SDK.ApiError.Error">
+            <summary>
+            Error detail
+            </summary>
+        </member>
+        <member name="M:AssurBox.SDK.ApiError.ToString">
+            <summary>
+            Display the content of the error detail
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AssurBox.SDK.Error">
+            <summary>
+            ApiError from Microsoft API guidelines
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.Error.Code">
+            <summary>
+            Error code 
+            </summary>
+            <example>
+            500
+            </example>
+        </member>
+        <member name="P:AssurBox.SDK.Error.Message">
+            <summary>
+            Error message
+            </summary>
+            <example>
+            Internal server error
+            </example>
+        </member>
+        <member name="P:AssurBox.SDK.Error.Target">
+            <summary>
+            Error target
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.Error.Details">
+            <summary>
+            Detail 
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.Error.InnerError">
+            <summary>
+            Inner error (more details)
+            </summary>
+            <remarks>
+            Can be on many levels
+            </remarks>
+        </member>
+        <member name="M:AssurBox.SDK.Error.AddDetails(System.String,System.String,System.String)">
+            <summary>
+            Utility method to add details to the error
+            </summary>
+            <param name="code"></param>
+            <param name="message"></param>
+            <param name="target"></param>
+        </member>
+        <member name="M:AssurBox.SDK.Error.AddDetails(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Utility method to add details to the error
+            </summary>
+            <param name="errors"></param>
+        </member>
+        <member name="T:AssurBox.SDK.InnerError">
+            <summary>
+            Inner errror information
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.InnerError.Code">
+            <summary>
+            Error code
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.InnerError.innerError">
+            <summary>
+            Inner error 
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.ApiMessage">
+            <summary>
+            Base class for api messages
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.ApiMessage.Location">
+            <summary>
+            Location of the ressource
+            <see href="https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md"/>
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.ApiMessage.MessageId">
+            <summary>
+            Identifier for this specific message
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.ApiResponse">
+            <summary>
+            Base class for api response
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.ApiResponse.ResponseContent">
+            <summary>
+            Content
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.AssurBoxClient">
+            <summary>
+            A HTTP client wrapper for interacting with AssurBox's API
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.AssurBoxClient.UrlPath">
+            <summary>
+            Gets or sets the path to the API resource.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.AssurBoxClient.Version">
+            <summary>
+            Gets or sets the API version.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.AssurBoxClient.MediaType">
+            <summary>
+            Gets or sets the request media type.
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.AssurBoxClient.client">
+            <summary>
+            The HttpClient instance to use for all calls from this SendGridClient instance.
+            </summary>
+        </member>
+        <member name="M:AssurBox.SDK.AssurBoxClient.#ctor(AssurBox.SDK.AssurBoxClientOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AssurBox.SDK.AssurBoxClient"/> class.
+            </summary>
+            <param name="options">A <see cref="T:AssurBox.SDK.AssurBoxClientOptions"/> instance that defines the configuration settings to use with the client </param>
+            <returns>Interface to the AssurBox REST API</returns>
+        </member>
+        <member name="M:AssurBox.SDK.AssurBoxClient.#ctor(System.Net.Http.HttpClient,AssurBox.SDK.AssurBoxClientOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AssurBox.SDK.AssurBoxClient"/> class.
+            </summary>
+            <param name="httpClient">An optional http client which may me injected in order to facilitate testing.</param>
+            <param name="options">A <see cref="T:AssurBox.SDK.AssurBoxClientOptions"/> instance that defines the configuration settings to use with the client </param>
+            <returns>Interface to the AssurBox REST API</returns>
+        </member>
+        <member name="M:AssurBox.SDK.AssurBoxClient.InitiateClient(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.String,System.String)">
+            <summary>
+            Common method to initiate internal fields regardless of which constructor was used.
+            </summary>
+            <param name="apiKey">Your SendGrid API key.</param>
+            <param name="host">Base url (e.g. https://api.sendgrid.com)</param>
+            <param name="requestHeaders">A dictionary of request headers</param>
+            <param name="version">API version, override AddVersion to customize</param>
+            <param name="urlPath">Path to endpoint (e.g. /path/to/endpoint)</param>
+        </member>
+        <member name="M:AssurBox.SDK.AssurBoxClient.GetJsoncontent``1(``0)">
+            <summary>
+            Get object serialized as Json
+            
+            </summary>
+            <remarks>
+            <code>
+             client.PostAsync("api/CarGreenCard", content).Result;
+            </code>
+            </remarks>
+            <typeparam name="T"></typeparam>
+            <param name="content"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AssurBox.SDK.AssurBoxClient.Dispose">
+            <summary>
+            Closes the client and releases the ressources
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.AssurBoxClientOptions">
+            <summary>
+            Defines the options to use with the AssurBox client
+            </summary>
+        </member>
+        <member name="M:AssurBox.SDK.AssurBoxClientOptions.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AssurBox.SDK.AssurBoxClientOptions"/> class.
+            </summary>
+        </member>
+        <member name="M:AssurBox.SDK.AssurBoxClientOptions.GetBaseURL">
+            <summary>
+            Gets the base url for the current <see cref="P:AssurBox.SDK.AssurBoxClientOptions.Environment"/>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AssurBox.SDK.AssurBoxClientOptions.#ctor(AssurBox.SDK.AssurBoxEnvironments)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AssurBox.SDK.AssurBoxClientOptions"/> class.
+            </summary>
+            <param name="environment">Specify the environment</param>
+        </member>
+        <member name="P:AssurBox.SDK.AssurBoxClientOptions.ReliabilitySettings">
+            <summary>
+            Gets or sets the reliability settings to use on HTTP Requests
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.AssurBoxClientOptions.ApiKey">
+            <summary>
+            Gets or sets the Assurbox API Bearer Token 
+            > needs to be retrieved first
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.AssurBoxClientOptions.RequestHeaders">
+            <summary>
+            Gets or sets the request headers to use on HttpRequests sent to AssurBox
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.AssurBoxClientOptions.Host">
+            <summary>
+            Gets or sets base url (e.g. https://api.assurbox.net, this is the default)
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.AssurBoxClientOptions.Version">
+            <summary>
+            Gets or sets API version, override AddVersion to customize
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.AssurBoxClientOptions.UrlPath">
+            <summary>
+            Gets or sets the path to the API endpoint.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.AssurBoxClientOptions.Environment">
+            <summary>
+            Speficify the environment 
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.AssurBoxEnvironments">
+            <summary>
+            List of different AssurBox environenments
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.AssurBoxEnvironments.Test">
+            <summary>
+            Test environment : use this for development 
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.AssurBoxEnvironments.Prod">
+            <summary>
+            Production environment
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.AssurBoxException">
+            <summary>
+            This exception is thrown when an error happens in the AssurBox Api.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.AssurBoxException.ErrorCode">
+            <summary>
+            Gets or sets the error code (HTTP status code)
+            </summary>
+            <value>The error code (HTTP status code).</value>
+        </member>
+        <member name="P:AssurBox.SDK.AssurBoxException.ErrorDetail">
+            <summary>
+            Details of the error
+            </summary>
+        </member>
+        <member name="M:AssurBox.SDK.AssurBoxException.#ctor">
+            <summary>
+            Creates a new instance of the <see cref="T:AssurBox.SDK.AssurBoxException"/> class
+            </summary>
+        </member>
+        <member name="M:AssurBox.SDK.AssurBoxException.#ctor(System.String)">
+            <summary>
+            Creates a new instance of the <see cref="T:AssurBox.SDK.AssurBoxException"/> class
+            </summary>
+        </member>
+        <member name="M:AssurBox.SDK.AssurBoxException.#ctor(System.String,System.Exception)">
+            <summary>
+            Creates a new instance of the <see cref="T:AssurBox.SDK.AssurBoxException"/> class
+            </summary>
+        </member>
+        <member name="M:AssurBox.SDK.AssurBoxException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Creates a new instance of the <see cref="T:AssurBox.SDK.AssurBoxException"/> class
+            </summary>
+        </member>
+        <member name="M:AssurBox.SDK.AssurBoxException.#ctor(System.Int32,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AssurBox.SDK.AssurBoxException"/> class.
+            </summary>
+            <param name="errorCode">HTTP status code.</param>
+            <param name="message">Error message.</param>
+        </member>
+        <member name="M:AssurBox.SDK.AssurBoxException.#ctor(AssurBox.SDK.ApiError,System.Int32,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AssurBox.SDK.AssurBoxException"/> class.
+            </summary>
+            <param name="error">Error object</param>
+            <param name="errorCode">HTTP status code.</param>
+            <param name="message">Error message.</param>
+        </member>
+        <member name="M:AssurBox.SDK.AssurBoxException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:AssurBox.SDK.Attachment">
+            <summary>
+            Defines an attachment
+            </summary>
+            <remarks>
+            Use this object to send or read files
+            </remarks>
+        </member>
+        <member name="P:AssurBox.SDK.Attachment.Content">
+            <summary>
+            Gets or sets the Base64 encoded content of the attachment.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.Attachment.Type">
+            <summary>
+             Gets or sets the mime type of the content you are attaching. For example, application/pdf or image/jpeg.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.Attachment.Filename">
+            <summary>
+            Gets or sets the filename of the attachment.
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.Clients.CarGreenCardClient">
+            <summary>
+            This class contains several methods allowing the request of green cards
+            </summary>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.CarGreenCardClient.#ctor(AssurBox.SDK.AssurBoxClientOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AssurBox.SDK.Clients.CarGreenCardClient"/> class.
+            </summary>
+            <param name="options">A <see cref="T:AssurBox.SDK.AssurBoxClientOptions"/> instance that defines the configuration settings to use with the client </param>
+            <returns>Interface to the AssurBox REST API</returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.CarGreenCardClient.#ctor(System.Net.Http.HttpClient,AssurBox.SDK.AssurBoxClientOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AssurBox.SDK.Clients.CarGreenCardClient"/> class.
+            </summary>
+            <param name="httpClient">An optional http client which may me injected in order to facilitate testing.</param>
+            <param name="options">A <see cref="T:AssurBox.SDK.AssurBoxClientOptions"/> instance that defines the configuration settings to use with the client </param>
+            <returns>Interface to the AssurBox REST API</returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.CarGreenCardClient.GetInsurancesGreenCardsIssuers(System.Threading.CancellationToken)">
+            <summary>
+            Gets a list of insurances issuing green cards
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.CarGreenCardClient.GetRequests(System.Int32,System.Int32,System.Threading.CancellationToken,AssurBox.SDK.DTO.GreenCard.GreenCardRequestStatus)">
+            <summary>
+            Gets a list of green card requests for car for the caller
+            </summary>
+            <param name="pageNumber">default value : 0</param>
+            <param name="pageSize">default value : 50</param>
+            <param name="cancellationToken"></param>
+            <param name="status">default value : ALL</param>
+            <returns>List of green card requests for car</returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.CarGreenCardClient.GetRequest(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Gets a specific green card request for car
+            </summary>
+            <param name="correlationId"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.CarGreenCardClient.GetRequest(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets a specific green card request for car
+            </summary>
+            <param name="correlationId"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.CarGreenCardClient.GetResponse(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Gets only the response for one green card request. (not the full request object)
+            </summary>
+            <param name="correlationId"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.CarGreenCardClient.GetResponse(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets only the response for one green card request. (not the full request object)
+            </summary>
+            <param name="correlationId"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.CarGreenCardClient.GetDocumentSNCA(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Retrieve the SNCA document
+            </summary>
+            <param name="correlationId">The correlationid of the green card request</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.CarGreenCardClient.GetDocumentSNCA(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Retrieve the SNCA document
+            </summary>
+            <param name="correlationId">The correlationid of the green card request</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.CarGreenCardClient.NewRequest(AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInitialization,System.Threading.CancellationToken)">
+            <summary>
+            Creates a new request for a green card
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.CarGreenCardClient.ChangeRequest(AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestModification,System.Threading.CancellationToken)">
+            <summary>
+            Edit the green card request.
+            The modification can be the <see cref="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestModification.LicencePlate"/> or the <see cref="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestModification.VIN"/> properties.
+            If other properties needs to be changed, please use the <see cref="M:AssurBox.SDK.Clients.CarGreenCardClient.CancelRequest(AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestCancellation,System.Threading.CancellationToken)"/> method first, then create a new request <see cref="M:AssurBox.SDK.Clients.CarGreenCardClient.NewRequest(AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInitialization,System.Threading.CancellationToken)"/>
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.CarGreenCardClient.CancelRequest(AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestCancellation,System.Threading.CancellationToken)">
+            <summary>
+            Cancels a green car request
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.CarGreenCardClient.SendResponse(AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestResponse,System.Threading.CancellationToken)">
+            <summary>
+            To be used by an insurer to post a response
+            </summary>
+            <param name="greenCardResponse"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AssurBox.SDK.Clients.ContractTerminationClient">
+            <summary>
+            This class contains several methods allowing to interact with the Contract termination Api
+            </summary>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.ContractTerminationClient.#ctor(AssurBox.SDK.AssurBoxClientOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AssurBox.SDK.Clients.ContractTerminationClient"/> class.
+            </summary>
+            <param name="options">A <see cref="T:AssurBox.SDK.AssurBoxClientOptions"/> instance that defines the configuration settings to use with the client </param>
+            <returns>Interface to the AssurBox REST API</returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.ContractTerminationClient.#ctor(System.Net.Http.HttpClient,AssurBox.SDK.AssurBoxClientOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AssurBox.SDK.Clients.ContractTerminationClient"/> class.
+            </summary>
+            <param name="httpClient">An optional http client which may me injected in order to facilitate testing.</param>
+            <param name="options">A <see cref="T:AssurBox.SDK.AssurBoxClientOptions"/> instance that defines the configuration settings to use with the client </param>
+            <returns>Interface to the AssurBox REST API</returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.ContractTerminationClient.GetInsurancesForContractTerminationAsync(System.Threading.CancellationToken)">
+            <summary>
+            Gets a list of insurances providing the contract termination service
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.ContractTerminationClient.RequestContractTerminationAsync(AssurBox.SDK.DTO.Contract.ContractTerminationRequest,System.Threading.CancellationToken)">
+            <summary>
+            Create a contract termination request
+            </summary>
+            <param name="request">The <see cref="T:AssurBox.SDK.DTO.Contract.ContractTerminationRequest"/> information</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.ContractTerminationClient.SendContractTerminationResponseAsync(AssurBox.SDK.DTO.Contract.ContractTerminationResponse,System.Threading.CancellationToken)">
+            <summary>
+            Sends a response to a contract termination request
+            </summary>
+            <param name="response">The <see cref="T:AssurBox.SDK.DTO.Contract.ContractTerminationResponse"/> information</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.ContractTerminationClient.GetContractTerminationRequestAsync(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Gets a specific contract termination request
+            </summary>
+            <param name="correlationid"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AssurBox.SDK.Clients.IdentityClient">
+            <summary>
+            Provides methods to get the identity information of the current user.
+            </summary>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.IdentityClient.#ctor(AssurBox.SDK.AssurBoxClientOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AssurBox.SDK.Clients.IdentityClient"/> class.
+            </summary>
+            <param name="options">A <see cref="T:AssurBox.SDK.AssurBoxClientOptions"/> instance that defines the configuration settings to use with the client </param>
+            <returns>Interface to the AssurBox REST API</returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.IdentityClient.#ctor(System.Net.Http.HttpClient,AssurBox.SDK.AssurBoxClientOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AssurBox.SDK.Clients.IdentityClient"/> class.
+            </summary>
+            <param name="httpClient">An optional http client which may me injected in order to facilitate testing.</param>
+            <param name="options">A <see cref="T:AssurBox.SDK.AssurBoxClientOptions"/> instance that defines the configuration settings to use with the client </param>
+            <returns>Interface to the AssurBox REST API</returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.IdentityClient.GetCurrentUserName(System.Threading.CancellationToken)">
+            <summary>
+            Gets the user name of the current user
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.IdentityClient.GetCurrentUserOrganization(System.Threading.CancellationToken)">
+            <summary>
+            Gets the organization of the current user
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AssurBox.SDK.Clients.OrganizationClient">
+            <summary>
+            Provides methods to retrieve information about Orgnanizations using AssurBox
+            </summary>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.OrganizationClient.#ctor(AssurBox.SDK.AssurBoxClientOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AssurBox.SDK.Clients.OrganizationClient"/> class.
+            </summary>
+            <param name="options">A <see cref="T:AssurBox.SDK.AssurBoxClientOptions"/> instance that defines the configuration settings to use with the client </param>
+            <returns>Interface to the AssurBox REST API</returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.OrganizationClient.#ctor(System.Net.Http.HttpClient,AssurBox.SDK.AssurBoxClientOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AssurBox.SDK.Clients.OrganizationClient"/> class.
+            </summary>
+            <param name="httpClient">An optional http client which may me injected in order to facilitate testing.</param>
+            <param name="options">A <see cref="T:AssurBox.SDK.AssurBoxClientOptions"/> instance that defines the configuration settings to use with the client </param>
+            <returns>Interface to the AssurBox REST API</returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.OrganizationClient.GetInsurances(System.Threading.CancellationToken)">
+            <summary>
+            Gets the list of insurances available
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.OrganizationClient.GetInsuranceAgencies(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets the list of agencies of a specific insurance
+            </summary>
+            <param name="insuranceVAT"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.OrganizationClient.GetDealers(System.Threading.CancellationToken)">
+            <summary>
+            Gets the list of dealerships using AssurBox
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AssurBox.SDK.Clients.SecurityClient">
+            <summary>
+            Provides methods to authenticate in AssurBox
+            </summary>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.SecurityClient.#ctor(System.Net.Http.HttpClient,AssurBox.SDK.AssurBoxClientOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AssurBox.SDK.Clients.SecurityClient"/> class.
+            </summary>
+            <param name="client">An optional http client which may me injected in order to facilitate testing.</param>
+            <param name="options">A <see cref="T:AssurBox.SDK.AssurBoxClientOptions"/> instance that defines the configuration settings to use with the client </param>
+            <returns>Interface to the AssurBox REST API</returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.SecurityClient.#ctor(AssurBox.SDK.AssurBoxClientOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AssurBox.SDK.AssurBoxClient"/> class.
+            </summary>
+            <param name="options">A <see cref="T:AssurBox.SDK.AssurBoxClientOptions"/> instance that defines the configuration settings to use with the client </param>
+            <returns>Interface to the AssurBox REST API</returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.SecurityClient.GetBearerToken(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets the bearer token
+            </summary>
+            <param name="clientId"></param>
+            <param name="clientSecret"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AssurBox.SDK.Clients.SystemCheckClient">
+            <summary>
+            Provides methods to test the Api
+            </summary>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.SystemCheckClient.#ctor(AssurBox.SDK.AssurBoxClientOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AssurBox.SDK.Clients.SystemCheckClient"/> class.
+            </summary>
+            <param name="options">A <see cref="T:AssurBox.SDK.AssurBoxClientOptions"/> instance that defines the configuration settings to use with the client </param>
+            <returns>Interface to the AssurBox REST API</returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.SystemCheckClient.#ctor(System.Net.Http.HttpClient,AssurBox.SDK.AssurBoxClientOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AssurBox.SDK.Clients.SystemCheckClient"/> class.
+            </summary>
+            <param name="httpClient">An optional http client which may me injected in order to facilitate testing.</param>
+            <param name="options">A <see cref="T:AssurBox.SDK.AssurBoxClientOptions"/> instance that defines the configuration settings to use with the client </param>
+            <returns>Interface to the AssurBox REST API</returns>
+        </member>
+        <member name="M:AssurBox.SDK.Clients.SystemCheckClient.Echo(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Sends a test message to the server to check if it's answering
+            </summary>
+            <param name="input"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.Address">
+            <summary>
+            Represents an Address for AssurBox API
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Address.Street">
+            <summary>
+            Street
+            </summary>
+            <example>
+            Val Sainte Croix
+            </example>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Address.Number">
+            <summary>
+            Street number
+            </summary>
+            <example>
+            99
+            </example>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Address.PostboxNumber">
+            <summary>
+            Post box number
+            </summary>
+            <example>
+            bte 15
+            </example>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Address.ZipOrPostcode">
+            <summary>
+            Zip code
+            </summary>
+            <example>
+            1371
+            </example>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Address.City">
+            <summary>
+            City
+            </summary>
+            <example>
+            Luxembourg
+            </example>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Address.Country">
+            <summary>
+            Country
+            </summary>
+            <example>
+            "Luxembourg" or "LU"
+            </example>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Address.StateOrProvince">
+            <summary>
+            State, or province, according to the country
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Address.OtherAddressDetails">
+            <summary>
+            Some complements
+            </summary>
+            <example>
+            Appartement 3B
+            </example>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.Agency">
+            <summary>
+            An agency is part of an organization (it can be an agent for an insurer)
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Agency.Identifier">
+            <summary>
+            Identifier of the organization in AssurBox
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Agency.Reference">
+            <summary>
+            Agency specific reference at the organization (internal identifier of an agent)
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.Company">
+            <summary>
+            Reprensents a company
+            </summary>
+            <remarks>
+            A company is not an user of AssurBox, it can be a customer for a green card request
+            </remarks>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Company.Name">
+            <summary>
+            Name of the company
+            </summary>
+            <example>
+            C-Services SA
+            </example>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Company.VAT">
+            <summary>
+            VAT of the company (international vat number)
+            </summary>
+            <example>
+            LU22548649
+            </example>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Company.NationalIdentityNumber">
+            <summary>
+            National identity number of the company
+            https://impotsdirects.public.lu/fr/az/n/num__ro_dossier.html
+            Le numéro d’identification nationale luxembourgois des personnes morales (PM) est également connu sous le nom de «matricule» ou «numéro d’identification personnelle» à 11 positions. En ce qui concerne les impôts directs, ce « matricule » peut également servir de numéro d'identification fiscale (NIF ou TIN, tax identification number). Sa structure reprend l’année de constitution et la forme juridique de la personne morale. Les cinq derniers chiffres sont aléatoires AAAA FF XX XXX.
+            Ce numéro de dossier à 11 chiffres est à indiquer dans tous les rapports avec les bureau compétents de L'ACD. 
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Company.Email">
+            <summary>
+            Email of the <see cref="T:AssurBox.SDK.DTO.Company"/>
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Company.Phone">
+            <summary>
+            Phone of the <see cref="T:AssurBox.SDK.DTO.Company"/>
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Company.LegalAddress">
+            <summary>
+            Address of the company headquarters
+            </summary>
+            <example>
+            89A Parc d'Activités Capellen
+            rue Pafebruch
+            L-8308 Capellen
+            Luxembourg
+            </example>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Company.Representative">
+            <summary>
+            The person representative for the company
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.Contract.ContractTerminationInfo">
+            <summary>
+            This class represents the loaded information about a contract termination request
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Contract.ContractTerminationInfo.CorrelationId">
+            <summary>
+            The identifier for the contract termination case
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Contract.ContractTerminationInfo.Requestor">
+            <summary>
+            The organization that made the request.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Contract.ContractTerminationInfo.Requestee">
+            <summary>
+            The organization for whom the request is made
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Contract.ContractTerminationInfo.HasResponse">
+            <summary>
+            This flag indicate whether or not a response from the insurance is available
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Contract.ContractTerminationInfo.Request">
+            <summary>
+            The details of the request
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Contract.ContractTerminationInfo.Response">
+            <summary>
+            The details of the response
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.Contract.ContractTerminationReasons">
+            <summary>
+            Reasons to terminate a contract
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.Contract.ContractTerminationReasons.Undefined">
+            <summary>
+            Undefined
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.Contract.ContractTerminationReasons.BeforeDueDate">
+            <summary>
+            termination before due date
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.Contract.ContractTerminationReasons.RiskDoesNotExistsAnymore">
+            <summary>
+            Risk doesn't exists anymore
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.Contract.ContractTerminationReasons.RiskInsuredByAnotherContractAtTheSameCompany">
+            <summary>
+            Risk is insured by another contract (same company)
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.Contract.ContractTerminationReasons.RiskInsuredByAnotherContractAtAnotherCompany">
+            <summary>
+            Risk is insured by another contract (other company)
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.Contract.ContractTerminationReasons.DeceasedPolicyholder">
+            <summary>
+            Deceased policyholder
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.Contract.ContractTerminationRequest">
+            <summary>
+            Reprents a request made to an insurer for a contract termination
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Contract.ContractTerminationRequest.RequestDateUTC">
+            <summary>
+            Date of request creation (read only)
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Contract.ContractTerminationRequest.RecipientInsurer">
+            <summary>
+            Insurance to whom the request is made.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Contract.ContractTerminationRequest.PolicyReference">
+            <summary>
+            Policy reference for the insurance (if knonw)
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Contract.ContractTerminationRequest.Risk">
+            <summary>
+            The Risk covered by the insurance <see cref="T:AssurBox.SDK.DTO.Policy"/>
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Contract.ContractTerminationRequest.TerminationDate">
+            <summary>
+            Date when the contract should be terminated
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Contract.ContractTerminationRequest.TerminationReason">
+            <summary>
+            Reason of the contract termination
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Contract.ContractTerminationRequest.Communication">
+            <summary>
+            Communication for the insurer
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.Contract.ContractTerminationResponse">
+            <summary>
+            Contract to be POSTED to the AssurBox's response endpoint for a contract termination request
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Contract.ContractTerminationResponse.CorrelationId">
+            <summary>
+            The unique identifier for the whole process of the contract termination request
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Contract.ContractTerminationResponse.RequestDateUTC">
+            <summary>
+            Date of response creation
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Contract.ContractTerminationResponse.IsTerminationRequestAccepted">
+            <summary>
+            Gets or sets a value indicating whether or not the request is accepted
+            True : the request is accepted
+            False : the request is rejected, or needs more information ==> the <see cref="P:AssurBox.SDK.DTO.Contract.ContractTerminationResponse.Communication"/> property should contains information regarding the reasons
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Contract.ContractTerminationResponse.EffectiveTerminationDate">
+            <summary>
+            Date when the contract will be terminated
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Contract.ContractTerminationResponse.Communication">
+            <summary>
+            Communication for the requester. 
+            Should be the rejection reason if <see cref="P:AssurBox.SDK.DTO.Contract.ContractTerminationResponse.IsTerminationRequestAccepted"/> is set to false
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.Coverage">
+            <summary>
+            Coverage information for a specific cover
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Coverage.Cover">
+            <summary>
+            What is the cover
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Coverage.IsCovered">
+            <summary>
+            Is the <see cref="P:AssurBox.SDK.DTO.Coverage.Cover"/> covered 
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Coverage.DeductibleType">
+            <summary>
+            The type of applied deductible
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Coverage.Deductible">
+            <summary>
+            What is the applied deductible. 
+            The value depends of the <see cref="P:AssurBox.SDK.DTO.Coverage.DeductibleType"/> value 
+            if in percentage : 1 = 100%
+            if in fixed ammount : the ammount
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Coverage.Terms">
+            <summary>
+            Terms applied to this cover
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Coverage.AdditionalInformation">
+            <summary>
+            Additional information about the cover
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.DeductibleTypes">
+            <summary>
+            Type of deductible
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.DeductibleTypes.None">
+            <summary>
+            No deductible 
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.DeductibleTypes.Percentage">
+            <summary>
+            Deductible is a percentage
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.DeductibleTypes.FixedAmount">
+            <summary>
+            Deductible is a fixed ammount
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.DeviceInsuranceCoverTypes">
+            <summary>
+            Types of covers
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.DeviceInsuranceCoverTypes.Undefined">
+            <summary>
+            Undefined
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.DeviceInsuranceCoverTypes.Glass">
+            <summary>
+            Glass
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.DeviceInsuranceCoverTypes.Theft">
+            <summary>
+            Teft coverage
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.DeviceInsuranceCoverTypes.Replacement">
+            <summary>
+            Replacement
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.DeviceInsuranceCoverTypes.Loss">
+            <summary>
+            Loss
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.TravelInsuranceCoverTypes">
+            <summary>
+            Types of covers fir travel insurance
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.TravelInsuranceCoverTypes.Undefined">
+            <summary>
+            Undefined
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.TravelInsuranceCoverTypes.Cancellation">
+            <summary>
+            Cancellation
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:AssurBox.SDK.DTO.TravelInsuranceCoverTypes.Repatriation" -->
+        <member name="F:AssurBox.SDK.DTO.TravelInsuranceCoverTypes.Theft">
+            <summary>
+            Teft coverage
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.TravelInsuranceCoverTypes.Assistance">
+            <summary>
+            Assistance coverage
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.VehicleInsuranceCoverTypes">
+            <summary>
+            Types of covers
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.VehicleInsuranceCoverTypes.Undefined">
+            <summary>
+            Undefined
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.VehicleInsuranceCoverTypes.Liability">
+            <summary>
+            Liability
+            </summary>
+            <remarks>
+            Automobile liability insurance is financial protection for a driver who,
+            while operating a vehicle, harms someone else or their property.
+            Automobile liability insurance only covers injuries or damages to third parties and their property,
+            not to the driver or the driver’s property. 
+            The two components of automobile liability insurance are bodily injury liability and property damage liability. 
+            Automobile liability insurance does not have a deductible.
+            </remarks>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.VehicleInsuranceCoverTypes.Glass">
+            <summary>
+            Glass coverage 
+            </summary>
+            <remarks>
+            Full glass coverage may be added 
+            to allow for glass coverage without a deductible.
+            In some cases, such as with windshield damage, 
+            the comprehensive deductible may be waived if the glass is repaired instead of replaced.
+            </remarks>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.VehicleInsuranceCoverTypes.Theft">
+            <summary>
+            Teft coverage
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.VehicleInsuranceCoverTypes.Replacement">
+            <summary>
+            Replacement coverage
+            </summary>
+            <remarks>
+            Can be car replacement, or phone replacement
+            </remarks>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.VehicleInsuranceCoverTypes.Assistance">
+            <summary>
+            Assistance coverage
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.Customer">
+            <summary>
+            Represents a customer
+            A customer can be an individual (<see cref="P:AssurBox.SDK.DTO.Customer.Person"/>) or a company (<see cref="P:AssurBox.SDK.DTO.Customer.Company"/>)
+            If the <see cref="P:AssurBox.SDK.DTO.Customer.IsCompany"/> flag is set, the system will validates that the <see cref="P:AssurBox.SDK.DTO.Customer.Company"/> information are set
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Customer.IsCompany">
+            <summary>
+            Defines if the customer is a company.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Customer.Person">
+            <summary>
+            Customer info if the customer is a person
+            </summary>
+            <example>
+            Samuel Beauvois
+            </example>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Customer.Company">
+            <summary>
+            Customer info if te customer is a company (moral person)
+            </summary>
+            <example>
+            C-Services SA
+            </example>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Customer.PartnerOrganizationReference">
+            <summary>
+            Reference of the customer in the sender system 
+            </summary>
+            <remarks>
+            Reference in the garage's DMS system in case we know it (sent from DMS)
+            </remarks>
+            <example>
+            CUST000222
+            </example>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Customer.InsuranceOrganizationReference">
+            <summary>
+            Reference of the customer in the recipient system 
+            </summary>
+            <remarks>
+            Reference in the insurer's system in case we know it (retrieved via api)
+            </remarks>
+            <example>
+            110000214
+            </example>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.FuelTypes">
+            <summary>
+            Types of fuel
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.FuelTypes.Undefined">
+            <summary>
+            Undefined
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.FuelTypes.LPG">
+            <summary>
+            LPG
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.FuelTypes.Electrique">
+            <summary>
+            Electrique
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.FuelTypes.Essence_LPG">
+            <summary>
+            Essence LPG
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.FuelTypes.Essence_CNG">
+            <summary>
+            Essence CNG
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.FuelTypes.Diesel">
+            <summary>
+            Diesel
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.FuelTypes.GazNaturelComprime">
+            <summary>
+            Gaz naturel comprimé
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.FuelTypes.Essence">
+            <summary>
+            Essence
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.FuelTypes.HybrideEssenceElecNOVC">
+            <summary>
+            Hybride Essence Elec NOVC
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.FuelTypes.EssenceMethane">
+            <summary>
+            Essence Methane
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.FuelTypes.HybrideEssenceElecOVC">
+            <summary>
+            Hybride Essence Elec OVC
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.FuelTypes.HybrideEssenceElec">
+            <summary>
+            Hybride essence electricite
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.FuelTypes.HybrideDieselElecNOVC">
+            <summary>
+            Hybride diesel electricite NOVC
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.FuelTypes.HybrideEssenceEthanol">
+            <summary>
+            Hybride essence ethanol
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.FuelTypes.HybrideDieselElecOVC">
+            <summary>
+            Hybride diesel electricite OVC
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.GreenCard.Car.Car">
+            <summary>
+            Defines a Car
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestCancellation">
+            <summary>
+            Represents a cancellation for a green card request
+            
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestCancellation.RequestDateUTC">
+            <summary>
+            Date of request creation
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestCancellation.CorrelationId">
+            <summary>
+            The unique identifier for the request to cancel
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestCancellation.Communication">
+            <summary>
+            An enventual communication for the insurance
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestModification">
+            <summary>
+            Represents a modification of a green card request
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestModification.RequestDateUTC">
+            <summary>
+            Date of request creation
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestModification.CorrelationId">
+            <summary>
+            The unique identifier the green card request to update
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestModification.LicencePlate">
+            <summary>
+            The licence plate (Must respect LU formats : 2 letters + 4 numbers, 4 numbers or 5 numbers)
+            </summary>
+            <remarks>Mandatory</remarks>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestModification.VIN">
+            <summary>
+            The Vehicle Identification Number (must be valid : alphanumeric : between 3 and 17 characters, no I,O,Q)
+            </summary>
+            <remarks>Mandatory</remarks>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestModification.Communication">
+            <summary>
+            An enventual communication for the insurance
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInitialization">
+            <summary>
+            Reprents a request made to an insurer for a green card (for a car)
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInitialization.RequestDateUTC">
+            <summary>
+            Date of request creation
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInitialization.RecipientInsurer">
+            <summary>
+            Insurance to whom the request is made.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInitialization.CustomerSpecificAgency">
+            <summary>
+            If the customer already has a specific agency
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInitialization.CarDetails">
+            <summary>
+            Details of the car
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInitialization.VehicleOwner">
+            <summary>
+            Information about the owner of the vehicle.
+            In the case of a leasing, it should be the leasing information
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInitialization.VehicleDriver">
+            <summary>
+            Information about the driver of the car 
+            (if the driver is different from the owner and the holder, or if the holder is a company)
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInitialization.VehicleHolder">
+            <summary>
+            Holder of the vehicle
+            (In case of a leasing, the company or the person that rents the vehicle)
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInitialization.Communication">
+            <summary>
+            A commmunication for the insurer 
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInitialization.EffectiveDate">
+            <summary>
+            Date on which the green card should be effective
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInitialization.RequestType">
+            <summary>
+            Type of green card request (new file, transcription, transfert) 
+            (New = 0, Transcription = 1, Transfert = 2)
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInitialization.LicencePlateToReplace">
+            <summary>
+            In the case of a <see cref="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInitialization.RequestType">Transcription </see> or a <see cref="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInitialization.RequestType">Transfert</see>
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInitialization.TransfertInsurer">
+            <summary>
+            In the case of a <see cref="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInitialization.RequestType">Transfert</see>
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestSummary">
+            <summary>
+            This class represents list of requests and paging information should be loaded when using GET
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestSummary.Data">
+            <summary>
+            The list of request item
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestSummary.Total">
+            <summary>
+            Paging - The total item available for the request
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestSummary.PageNumber">
+            <summary>
+            Paging - Index of the paging page
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestSummary.PageSize">
+            <summary>
+            Paging - The number of item return by the call
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestListItem">
+            <summary>
+            This class represents the part that should be loaded when using GET for a list of requests
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestListItem.CorrelationId">
+            <summary>
+            The identifier you can use to retrieve the full object
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestListItem.LicencePlate">
+            <summary>
+            Licence plate number of the car for which a request has been made.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestListItem.VIN">
+            <summary>
+            VIN of the car for which a request has been made.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestListItem.RequestDate">
+            <summary>
+            When the request has been made.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestListItem.CustomerName">
+            <summary>
+            Name of the customer for which a request has been made.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestListItem.InsuranceName">
+            <summary>
+            Name of the insurer to whom the request has been made.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestListItem.SenderOrganizationName">
+            <summary>
+            Name of the organization that made the request
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestListItem.HasResponse">
+            <summary>
+            This flag indicate whether or not a response from the insurance is available
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInfo">
+            <summary>
+            This class represents the loaded information about a request
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInfo.RequestDetails">
+            <summary>
+            The detail of the request
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInfo.Requestor">
+            <summary>
+            The organization that made the request.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInfo.Recipient">
+            <summary>
+            The organization for whom the request is made
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInfo.ResponseCommunication">
+            <summary>
+            A comment that was made by the insurer when sending the response.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestInfo.Attachments">
+            <summary>
+            List of attached files. Often a single file (the green card document), but in some cases the insurer can choose to attach several files.
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestDetails">
+            <summary>
+            Details of the request, up to date (regarding modifications)
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestResponse">
+            <summary>
+            Contract to be POSTED to the AssurBox's response endpoint for a green card request
+            </summary>
+        </member>
+        <member name="M:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestResponse.#ctor">
+            <summary>
+            Creates a new instance of the <see cref="T:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestResponse"/> class.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestResponse.CorrelationId">
+            <summary>
+            The unique identifier for the whole process of the green card request
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestResponse.RequestDateUTC">
+            <summary>
+            Date of request creation
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestResponse.Attachments">
+            <summary>
+            The green card file and additional files if needed
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestResponse.Communication">
+            <summary>
+            Some information if wanted
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestResponse.HasApproval">
+            <summary>
+            Indicates if the green card request was approved
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestResponse.ApprovalReason">
+            <summary>
+            Reason if no approval for the request
+            </summary>
+        </member>
+        <member name="M:AssurBox.SDK.DTO.GreenCard.Car.GreenCardRequestResponse.AddAttachment(System.String,System.String,System.String)">
+            <summary>
+            Append a file to the list of attachments
+            </summary>
+            <param name="filename"></param>
+            <param name="content">base 64</param>
+            <param name="type">Type of attachment</param>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.GreenCard.GreenCardRequestStatus">
+            <summary>
+            Status of green card requests
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.GreenCard.GreenCardRequestStatus.All">
+            <summary>
+            All requests
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.GreenCard.GreenCardRequestStatus.InProgress">
+            <summary>
+            Request being processed 
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.GreenCard.GreenCardRequestStatus.Finished">
+            <summary>
+            Request processed
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.GreenCard.GreenCardRequestType">
+            <summary>
+            Possible types of green card requests
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.GreenCard.GreenCardRequestType.New">
+            <summary>
+            New contract
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.GreenCard.GreenCardRequestType.Transcription">
+            <summary>
+            Transcription : the vehicle replaces a vehicle on an existing contract, the licence plate of the previous vehicle sould be provided
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.GreenCard.GreenCardRequestType.Transfert">
+            <summary>
+            Transfert (not an usual case) : the contract replaces a previous contract at another insurance company
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.Organization">
+            <summary>
+            An organization is a company that uses AssurBox 
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Organization.VAT">
+            <summary>
+            VAT number  (International VAT number)
+            </summary>
+            <example>
+            LU19536005
+            </example>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Organization.Name">
+            <summary>
+            Name of the organization
+            </summary>
+            <example>
+            Autopolis SA
+            </example>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.Person">
+            <summary>
+            Represents a person in AssurBox
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Person.LastName">
+            <summary>
+            LastName of the <see cref="T:AssurBox.SDK.DTO.Person"/>
+            </summary>
+            <example>
+            Beauvois
+            </example>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Person.FirstName">
+            <summary>
+            FirstName of the <see cref="T:AssurBox.SDK.DTO.Person"/>
+            </summary>
+            <example>
+            Samuel
+            </example>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Person.BirthDate">
+            <summary>
+            BirthDate of the <see cref="T:AssurBox.SDK.DTO.Person"/>
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Person.Email">
+            <summary>
+            Email of the <see cref="T:AssurBox.SDK.DTO.Person"/>
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Person.Phone">
+            <summary>
+            Phone of the <see cref="T:AssurBox.SDK.DTO.Person"/>
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Person.DrivingLicenseNumber">
+            <summary>
+            DrivingLicenseNumber of the <see cref="T:AssurBox.SDK.DTO.Person"/>
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Person.Address">
+            <summary>
+            Address information of the <see cref="T:AssurBox.SDK.DTO.Person"/>
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Person.NationalIdentityNumber">
+            <summary>
+            National identity number of the <see cref="T:AssurBox.SDK.DTO.Person"/>
+            https://impotsdirects.public.lu/fr/az/n/num__ro_dossier.html
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.Policy">
+            <summary>
+            In insurance, the insurance policy is a contract between the insurer and the insured,
+            known as the policyholder, which determines the claims which the insurer is legally required to pay.
+            In exchange for an initial payment, known as the premium, 
+            the insurer promises to pay for loss caused by perils covered under the policy language.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Policy.Reference">
+            <summary>
+            The policiy reference
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Policy.Risk">
+            <summary>
+            The Risk covered by the insurance <see cref="T:AssurBox.SDK.DTO.Policy"/>
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Policy.Coverages">
+            <summary>
+            The list of coverages included in this policy
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Policy.PolicyHolder">
+            <summary>
+            The policy holder
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Policy.Insurer">
+            <summary>
+            The insurer information
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.Risk">
+            <summary>
+            Risk information
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Risk.RiskType">
+            <summary>
+            The type of risk
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Risk.IdentifierType">
+            <summary>
+            Type of identifier for this risk
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Risk.Identifier">
+            <summary>
+            The risk identifier
+            </summary>
+            <example>
+            A licence plate, an IMEI number, ...
+            </example>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.RiskIdentifierTypes">
+            <summary>
+            Types of risk identifiers
+            </summary>
+            <remarks>
+            Must be an accepted type by the selected <see cref="T:AssurBox.SDK.DTO.RiskTypes"/>
+            </remarks>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.RiskIdentifierTypes.Undefined">
+            <summary>
+            Undefined
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.RiskIdentifierTypes.LicencePlate">
+            <summary>
+            Vehicle Licence plate
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.RiskIdentifierTypes.Address">
+            <summary>
+            Home Address
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.RiskIdentifierTypes.IMEI">
+            <summary>
+            IMEI code
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.RiskTypes">
+            <summary>
+            Types of risks (aka branchs)
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.RiskTypes.Undefined">
+            <summary>
+            Undefined
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.RiskTypes.Vehicle">
+            <summary>
+            Vehicule insurance
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.RiskTypes.Travel">
+            <summary>
+            Travel
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.RiskTypes.Home">
+            <summary>
+            Home
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.RiskTypes.MultimediaDevice">
+            <summary>
+            Multimedia device
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.Terms">
+            <summary>
+            Terms applied to an insurance
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Terms.StartDate">
+            <summary>
+            Date where the insurance starts
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Terms.EndDate">
+            <summary>
+            Date until the customer is covered by the insurance
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Terms.Information">
+            <summary>
+            Additional information (can be specificities)
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.Vehicle">
+            <summary>
+            Reprensents a vehicle
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Vehicle.VehicleCategory">
+            <summary>
+            Category of the vehicle
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Vehicle.Bodywork">
+            <summary>
+            Bodywork of the vehicle
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Vehicle.LicencePlate">
+            <summary>
+            The licence plate (Must respect LU formats : 2 letters + 4 numbers, 4 numbers or 5 numbers)
+            </summary>
+            <remarks>Mandatory</remarks>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Vehicle.VIN">
+            <summary>
+            The Vehicle Identification Number (must be valid : alphanumeric : between 3 and 17 characters, no I,O,Q)
+            </summary>
+            <remarks>Mandatory</remarks>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Vehicle.EuroTaxID">
+            <summary>
+            If your organization uses Eurotax, you can fill this field 
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Vehicle.VehicleAcquisitionType">
+            <summary>
+            Type of acquisition of the vehicle (0: undefined, 1 : new, 2 : used)
+            </summary>
+            <remarks>
+                <list type="table">
+                <listheader>
+                    <term>Value</term>
+                    <description>Description</description>
+                </listheader>
+                <item>
+                    <term>0</term>
+                    <description>Undefined</description>
+                </item>
+                 <item>
+                    <term>1</term>
+                    <description>New vehicle</description>
+                </item>
+                 <item>
+                    <term>3</term>
+                    <description>Used Vehicle (if selected, the <see cref="P:AssurBox.SDK.DTO.Vehicle.UsedVehicleMileage"/> value should be set)</description>
+                </item>
+                </list>
+            </remarks>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Vehicle.UsedVehicleMileage">
+            <summary>
+            If it's an used vehicle (<see cref="P:AssurBox.SDK.DTO.Vehicle.VehicleAcquisitionType"/> == 2)
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Vehicle.DateOfFirstRegistration">
+            <summary>
+            Date of the first registration of the vehicle
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Vehicle.Make">
+            <summary>
+            Make of the vehicle
+            </summary>
+            <example>
+            volkswagen, bmw, volvo
+            </example>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Vehicle.Model">
+            <summary>
+            Model of the vehicle
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Vehicle.Version">
+            <summary>
+            Model's version "commercial name"
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Vehicle.PriceIncludesVAT">
+            <summary>
+            Indicates if the price is provided with TVA
+            (if true: TVA is included)
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Vehicle.PriceWithOption">
+            <summary>
+            Price with option (Excluding VAT)
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Vehicle.PriceWithoutOption">
+            <summary>
+            Price without option (Excluding VAT)
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Vehicle.EngineSizeInCm3">
+            <summary>
+            Engine capacity, or Engine size (cm³)
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Vehicle.EnginePowerInKw">
+            <summary>
+            Engine power (kw)
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Vehicle.Fuel">
+            <summary>
+            Fuel type
+            </summary>
+            <remarks>
+            Fuel types :
+            <list type="table">
+                <listheader>
+                    <term>Value</term>
+                    <description>Description</description>
+                </listheader>
+                <item>
+                    <term>0</term>
+                    <description>Undefined</description>
+                </item>
+                <item>
+                    <term>2</term>
+                    <description>LPG</description>
+                </item>
+                <item>
+                    <term>3</term>
+                    <description>Electrique</description>
+                </item>
+                <item>
+                    <term>4</term>
+                    <description>Essence LPG</description>
+                </item>
+                <item>
+                    <term>5</term>
+                    <description>Essence CNG</description>
+                </item>
+                <item>
+                    <term>6</term>
+                    <description>Diesel</description>
+                </item>
+                <item>
+                    <term>7</term>
+                    <description>Gaz naturel comprimé</description>
+                </item>
+                <item>
+                    <term>8</term>
+                    <description>Essence</description>
+                </item>
+                <item>
+                    <term>9</term>
+                    <description>Hybride Essence Elec NOVC</description>
+                </item>
+                <item>
+                    <term>10</term>
+                    <description>Essence Methane</description>
+                </item>
+                <item>
+                    <term>11</term>
+                    <description>Hybride Essence Elec OVC</description>
+                </item>
+                <item>
+                    <term>12</term>
+                    <description>Hybride essence electricite</description>
+                </item>
+                <item>
+                    <term>13</term>
+                    <description>Hybride diesel electricite NOVC</description>
+                </item>        
+                <item>
+                    <term>14</term>
+                    <description>Hybride essence ethanol</description>
+                </item>
+                <item>
+                    <term>15</term>
+                    <description>Hybride diesel electricite OVC</description>
+                </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Vehicle.RunningOrderMassInKg">
+            <summary>
+            Mass in running order (kg) - unloaded
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Vehicle.MaximumMassInKg">
+            <summary>
+            Technically permissible maximum laden mass (Kg)
+            In french : "MMA -> Masse maximale autorisée"
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Vehicle.NumberOfDoors">
+            <summary>
+            Number of doors
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Vehicle.NumberOfFrontSeats">
+            <summary>
+            Number of seats in the front of the vehicle
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Vehicle.NumberOfBackSeats">
+            <summary>
+            Number of seats in the back of the vehicle
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Vehicle.Color">
+            <summary>
+            Color of the vehicle
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.DTO.Vehicle.CO2">
+            <summary>
+            CO2 emission in g/km 
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.DTO.VehicleAcquisitionType">
+            <summary>
+            Types of acquistion for a vehicle
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.VehicleAcquisitionType.Undefined">
+            <summary>
+            Default value : if the information is not provided
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.VehicleAcquisitionType.New">
+            <summary>
+            Brand new vehicle
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.DTO.VehicleAcquisitionType.Used">
+            <summary>
+            Used vehicle
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.EndpointContracts.Insurers.CustomerInfo">
+            <summary>
+            This class is what AssurBox expects if sending a get request on an insurer endpoint to retrieve customer information
+            </summary>
+            <remarks>Not specific to the green card request</remarks>
+        </member>
+        <member name="P:AssurBox.SDK.EndpointContracts.Insurers.CustomerInfo.Reference">
+            <summary>
+            Reference in the insurer system
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.EndpointContracts.Insurers.CustomerInfo.FirstName">
+            <summary>
+            First name
+            </summary>
+            <example>
+            Bertrand
+            </example>
+        </member>
+        <member name="P:AssurBox.SDK.EndpointContracts.Insurers.CustomerInfo.LastName">
+            <summary>
+            Last Name
+            </summary>
+            <example>
+            Deroanne
+            </example>
+        </member>
+        <member name="P:AssurBox.SDK.EndpointContracts.Insurers.CustomerInfo.Address">
+            <summary>
+            Address
+            </summary>
+            <example>
+            81 Rue des Mérovingiens L-8070 Bertrange
+            </example>
+        </member>
+        <member name="P:AssurBox.SDK.EndpointContracts.Insurers.CustomerInfo.BirthDate">
+            <summary>
+            Birthday of the customer
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.Link">
+            <summary>
+            Links for <see href="https://en.wikipedia.org/wiki/HATEOAS">HATEOAS</see>
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.Link.Href">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.Link.Rel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.Link.Method">
+            <summary>
+            Type of method
+            </summary>
+            <example>
+            POST
+            GET
+            PUT
+            DELETE
+            </example>
+        </member>
+        <member name="T:AssurBox.SDK.HttpContentExtensions">
+            <summary>
+            Extensions for HttpContent deserialization
+            </summary>
+        </member>
+        <member name="M:AssurBox.SDK.HttpContentExtensions.ReadAsApiResponseAsync(System.Net.Http.HttpContent)">
+            <summary>
+            Deserialize content as <see cref="T:AssurBox.SDK.ApiResponse"/>
+            </summary>
+            <param name="content"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AssurBox.SDK.HttpContentExtensions.ReadAsApiErrorAsync(System.Net.Http.HttpContent)">
+            <summary>
+            Deserialize content as <see cref="T:AssurBox.SDK.ApiError"/>
+            </summary>
+            <param name="content"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AssurBox.SDK.JwtTokenResult">
+            <summary>
+            Defines a JWTToken 
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.JwtTokenResult.access_token">
+            <summary>
+            Access token to use when calling the Api (with Bearer : the token)
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.JwtTokenResult.token_type">
+            <summary>
+            Type of token
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.JwtTokenResult.expires_in">
+            <summary>
+            Expiration of the token
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.JwtTokenResult.userName">
+            <summary>
+            Name of the user for whom the token was issued.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.JwtTokenResult.issued">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.JwtTokenResult.expires">
+            <summary>
+            Expiration
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.Reliability.ReliabilitySettings">
+            <summary>
+            <see href="https://github.com/sendgrid/sendgrid-csharp/blob/master/src/SendGrid/Reliability/ReliabilitySettings.cs"/>
+            </summary>
+        </member>
+        <member name="M:AssurBox.SDK.Reliability.ReliabilitySettings.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AssurBox.SDK.Reliability.ReliabilitySettings"/> class with default settings.
+            </summary>
+        </member>
+        <member name="M:AssurBox.SDK.Reliability.ReliabilitySettings.#ctor(System.Int32,System.TimeSpan,System.TimeSpan,System.TimeSpan)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AssurBox.SDK.Reliability.ReliabilitySettings"/> class.
+            </summary>
+            <param name="maximumNumberOfRetries">The maximum number of retries to execute against when sending an HTTP Request before throwing an exception</param>
+            <param name="minimumBackoff">The minimum amount of time to wait between between HTTP retries</param>
+            <param name="maximumBackOff">the maximum amount of time to wait between between HTTP retries</param>
+            <param name="deltaBackOff">the value that will be used to calculate a random delta in the exponential delay between retries</param>
+        </member>
+        <member name="P:AssurBox.SDK.Reliability.ReliabilitySettings.MaximumNumberOfRetries">
+            <summary>
+                Gets the maximum number of retries to execute against when sending an HTTP Request before throwing an exception. Defaults to 0 (no retries, you must explicitly enable)
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.Reliability.ReliabilitySettings.MinimumBackOff">
+            <summary>
+            Gets the minimum amount of time to wait between between HTTP retries. Defaults to 1 second
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.Reliability.ReliabilitySettings.MaximumBackOff">
+            <summary>
+            Gets the maximum amount of time to wait between between HTTP retries. Defaults to 10 seconds
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.Reliability.ReliabilitySettings.DeltaBackOff">
+            <summary>
+            Gets the value that will be used to calculate a random delta in the exponential delay between retries. Defaults to 1 second
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.Reliability.RetryDelegatingHandler">
+            <summary>
+            A delegating handler that provides retry functionality while executing a request
+            </summary>
+        </member>
+        <member name="M:AssurBox.SDK.Reliability.RetryDelegatingHandler.#ctor(AssurBox.SDK.Reliability.ReliabilitySettings)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AssurBox.SDK.Reliability.RetryDelegatingHandler"/> class.
+            </summary>
+            <param name="settings">A ReliabilitySettings instance</param>
+        </member>
+        <member name="M:AssurBox.SDK.Reliability.RetryDelegatingHandler.#ctor(System.Net.Http.HttpMessageHandler,AssurBox.SDK.Reliability.ReliabilitySettings)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AssurBox.SDK.Reliability.RetryDelegatingHandler"/> class.
+            </summary>
+            <param name="innerHandler">A HttpMessageHandler instance to set as the inner handler</param>
+            <param name="settings">A ReliabilitySettings instance</param>
+        </member>
+        <member name="M:AssurBox.SDK.Reliability.RetryDelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+            <summary>
+            
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AssurBox.SDK.SampleData.DevelopperStartup_DataForTests">
+            <summary>
+            These data are for test purpose only
+            </summary>
+        </member>
+        <member name="M:AssurBox.SDK.SampleData.DevelopperStartup_DataForTests.GetSampleData_Garage">
+            <summary>
+            Get sample data for a garage request
+            </summary>
+            <remarks>
+            
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:AssurBox.SDK.SampleData.DevelopperStartup_DataForTests.GetSampleData_Leasing">
+            <summary>
+            Get sample data for a Leasing
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AssurBox.SDK.StringHelper">
+            <summary>
+            Helper for string
+            </summary>
+        </member>
+        <member name="M:AssurBox.SDK.StringHelper.Base64Encode(System.String)">
+            <summary>
+            Encode in base 64 string
+            </summary>
+            <param name="plainText"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AssurBox.SDK.StringHelper.Base64Decode(System.String)">
+            <summary>
+            Decode from a base 64 string
+            </summary>
+            <param name="base64EncodedData"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AssurBox.SDK.WebHooks.AssurBoxConstants">
+            <summary>
+            Well-known names and values used in AssurBox receivers and handlers
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.WebHooks.AssurBoxConstants.ReceiverName">
+            <summary>
+            Gets the name of the AssurBox WebHook receiver.
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.WebHooks.AssurBoxWebHook">
+            <summary>
+            Base class for AssurBox WebHooks
+            Describes one or more event notifications received as an Outbound Message from AssurBox.
+            For details about AssurBox's Outbound Messages, see <c>http://assurbox.net/webhooks/</c>.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.WebHooks.AssurBoxWebHook.Id">
+            <summary>
+            Gets or sets the unique ID for this alert.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.WebHooks.AssurBoxWebHook.Name">
+            <summary>
+            Gets or sets the name of the alert.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.WebHooks.AssurBoxWebHook.Description">
+            <summary>
+            Gets or sets a description of the alert.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.WebHooks.AssurBoxWebHook.TimeStamp">
+            <summary>
+            The time the webhook was sent (UTC based)
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.WebHooks.AssurBoxWebHook.TransmissionAttemptCount">
+            <summary>
+            Number of attempt to send data
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.WebHooks.AssurBoxWebHook.ResourceType">
+            <summary>
+            Gets or sets the type of the impacted resource.
+            (eg : Green card request)
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.WebHooks.AssurBoxWebHook.CorrelationId">
+            <summary>
+            Gets or sets the ID of the resource.
+            </summary>
+            <remarks>
+            Reference key for communication between AssurBox and other APIs
+            This represents the whole file (ex : the whole green card request)
+            </remarks>
+        </member>
+        <member name="P:AssurBox.SDK.WebHooks.AssurBoxWebHook.MessageId">
+            <summary>
+            Identifier for this specific message
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.WebHooks.AssurBoxWebHook.RessourceLocation">
+            <summary>
+            Gets or sets a direct link to the resource on the AssurBox Api.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.WebHooks.AssurBoxWebHook.Requester">
+            <summary>
+            Gets or sets the Organization originating this Outbound Message.
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.WebHooks.GreenCardRequestNotification">
+            <summary>
+            Describes one or more event notifications received as an Outbound Message from AssurBox.
+            For details about AssurBox's Outbound Messages, see <c>http://assurbox.net/webhooks/</c>.
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.WebHooks.GreenCardRequestNotification.NotificationType">
+            <summary>
+            Gets or sets the type of communication
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.WebHooks.GreenCardRequestNotification.LicencePlate">
+            <summary>
+            The vehicle licence plate (Must respect LU formats : 2 letters + 4 numbers, 4 numbers or 5 numbers)
+            </summary>
+            <remarks>Mandatory</remarks>
+        </member>
+        <member name="P:AssurBox.SDK.WebHooks.GreenCardRequestNotification.VIN">
+            <summary>
+            The Vehicle Identification Number (must be valid : alphanumeric : between 3 and 17 characters, no I,O,Q)
+            </summary>
+            <remarks>Mandatory</remarks>
+        </member>
+        <member name="P:AssurBox.SDK.WebHooks.GreenCardRequestNotification.Communication">
+            <summary>
+            A commmunication for the receiver 
+            </summary>
+        </member>
+        <member name="P:AssurBox.SDK.WebHooks.GreenCardRequestNotification.EffectiveDate">
+            <summary>
+            Date on which the green card should be effective
+            </summary>
+        </member>
+        <member name="T:AssurBox.SDK.WebHooks.GreenCardRequestNotificationTypes">
+            <summary>
+            Type of notification for a green card request notification
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.WebHooks.GreenCardRequestNotificationTypes.InitialRequest">
+            <summary>
+            Initialization, very first request
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.WebHooks.GreenCardRequestNotificationTypes.Modification">
+            <summary>
+            Modification, if the first request had a small error
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.WebHooks.GreenCardRequestNotificationTypes.Cancelation">
+            <summary>
+            Delete/Cancel, if the first request was wrong, or if the green card is not required anymore
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.WebHooks.GreenCardRequestNotificationTypes.Retry">
+            <summary>
+            Retry, if no answer was provided in an acceptable time frame
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.WebHooks.GreenCardRequestNotificationTypes.Response">
+            <summary>
+            Response, to the requester
+            </summary>
+        </member>
+        <member name="F:AssurBox.SDK.WebHooks.GreenCardRequestNotificationTypes.Rejection">
+            <summary>
+            Rejection, if the request cannot be fullfiled by the insurance.
+            </summary>
+            <remarks>
+            A reason for rejection is expected in the <see cref="P:AssurBox.SDK.WebHooks.GreenCardRequestNotification.Communication"/> field.
+            </remarks>
+        </member>
+    </members>
+</doc>
